@@ -46,7 +46,7 @@ public:
 
     ~Matrix(void) = default;
 
-    void print(void) const;
+    virtual void print(void) const;
 };
 
 #pragma clang diagnostic push
