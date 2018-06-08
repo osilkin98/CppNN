@@ -53,6 +53,15 @@ NeuralLayer* NeuralLayer::operator*(const NeuralLayer *other) const {
     }
 }
 
+NeuralLayer* NeuralLayer::hadamard_product(const NeuralLayer *other) const {
+    if(equal_size(other)) {
+        NeuralLayer *new_layer = new NeuralLayer(N, M);
+    } else {
+        std::cerr << "Error: Hadamard product for:"  << this << ", dimension mismatched with " << other << "\n";
+        return NULL;
+    }
+}
+
 
 
 
