@@ -9,6 +9,9 @@
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCDFAInspection"
 
+
+/************ NEURON IMPLEMENTATION *************/
+
 const long double Neuron::operator()(const long double input)  {
     data = input;
     function = activation_function(input);
@@ -34,6 +37,17 @@ void Neuron::print(void) const {
               << function << "\n\tσ'(x): " << function_derivative << "\n};\n";
 }
 
+/************ NEURAL NETWORK IMPLEMENTATION *******************/
+
+NeuralLayer::NeuralLayer(const size_t n, const size_t m = 1) : Matrix<Neuron *>(n, m) {
+    register size_t i, j;
+    for(i = 0; i < N; ++i) {
+        for(j = 0; j < M; ++j) {
+            this -> matrix[i][j] = new Neuron;
+        }
+    }
+}
+
 NeuralLayer* NeuralLayer::operator*(const NeuralLayer *other) const {
     if(Matrix<Neuron *>::M == other -> N) {
         NeuralLayer *new_layer = new NeuralLayer(Matrix<Neuron *>::N, other -> M);
@@ -50,12 +64,20 @@ NeuralLayer* NeuralLayer::operator*(const NeuralLayer *other) const {
         return new_layer;
     } else {
         std::cerr << "Matrix Multiplication: Dimensions Mismatched\n";
+        return NULL;
     }
 }
 
 NeuralLayer* NeuralLayer::hadamard_product(const NeuralLayer *other) const {
     if(equal_size(other)) {
         NeuralLayer *new_layer = new NeuralLayer(N, M);
+        register size_t i, j;
+        for(i = 0; i < N; ++i) {
+            for(j = 0; j < M; ++i) {
+                new_layer -> matrix[i][j] -> data = this -> matrix[i][j] -> data * other -> matrix[i][j] -> data;
+            }
+        }
+        return new_layer;
     } else {
         std::cerr << "Error: Hadamard product for:"  << this << ", dimension mismatched with " << other << "\n";
         return NULL;

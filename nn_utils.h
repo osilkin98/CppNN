@@ -37,7 +37,7 @@ struct Neuron {
 
     Neuron(void) : data(0), function(0.5), function_derivative(0.25) {}
 
-    Neuron(const long double input) : data(input),
+    Neuron(const long double input = 0) : data(input),
                                       function(activation_function(input)),
                                       function_derivative(activation_function_prime(input))
     { }
@@ -62,7 +62,7 @@ public:
 
     NeuralLayer(const NeuralLayer& other);
 
-    NeuralLayer(const size_t n, const size_t m = 1) : Matrix<Neuron*>(n, m) { }
+    NeuralLayer(const size_t n, const size_t m);
 
     void print(void) const;
 
