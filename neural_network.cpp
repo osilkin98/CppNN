@@ -27,6 +27,7 @@ NeuralNetwork::~NeuralNetwork(void) {
     for(register size_t i = 0; i < network.size(); ++i) {
         delete network[i];
     }
+    network.clear();
 }
 
 void NeuralNetwork::set_dimension(const size_t index, const int N, const int M = 1) {
