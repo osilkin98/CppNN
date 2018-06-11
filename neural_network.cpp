@@ -37,5 +37,7 @@ void NeuralNetwork::set_dimension(const size_t index, const int N, const int M =
             delete network[index];
             network[index] = new NeuralLayer(N, M);
         }
+    } else {
+        throw "Index out of Bounds!";
     }
 }
