@@ -22,3 +22,20 @@ NeuralNetwork::NeuralNetwork(const NeuralNetwork &other) : network(other.network
         network[i] = new NeuralLayer(*other.network[i]);
     }
 }
+
+NeuralNetwork::~NeuralNetwork(void) {
+    for(register size_t i = 0; i < network.size(); ++i) {
+        delete network[i];
+    }
+}
+
+void NeuralNetwork::set_dimension(const size_t index, const int N, const int M = 1) {
+    if(index < network.size()) {
+        if(!network[index]) {
+            network[index] = new NeuralLayer(N, M);
+        } else {
+            delete network[index];
+            network[index] = new NeuralLayer(N, M);
+        }
+    }
+}

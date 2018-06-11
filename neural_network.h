@@ -21,7 +21,9 @@ private:
 
     NeuralNetwork(const NeuralNetwork& other);
 
-    ~NeuralNetwork();
+    void set_dimension(const size_t index, const int rows, const int cols);
+
+    ~NeuralNetwork(void);
 };
 
 
