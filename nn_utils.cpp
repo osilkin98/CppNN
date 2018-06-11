@@ -136,8 +136,7 @@ NeuralLayer::NeuralLayer(const NeuralLayer& other) : Matrix<Neuron *>(other.N, o
     }
 }
 
-void NeuralLayer::print(void) const {
-    register size_t i, j;
+void NeuralLayer::print(void) const { register size_t i, j;
     std::cout << "Printing NeuralLayer object at " << this << ":\n";
     for(i = 0; i < N; ++i) {
         std::cout << "[ ";
