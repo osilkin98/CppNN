@@ -49,6 +49,12 @@ NeuralLayer::NeuralLayer(const NeuralLayer &other) {
     }
 }
 
+NeuralLayer::~NeuralLayer(void) {
+    delete weights;
+    delete bias;
+    delete data;
+}
+
 NeuralLayer& NeuralLayer::operator=(const NeuralLayer& other) {
     pointer_assign(bias, other.bias);
     pointer_assign(weights, other.weights);
