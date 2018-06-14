@@ -1,8 +1,11 @@
 //
+// Created by Oleg on 6/14/2018.
+//
+
+#include "nn_utils.h"
+//
 // Created by oleg on 6/4/18.
 //
-/*
-#include "nn_utils.h"
 #include <iostream>
 #include <cmath>
 
@@ -11,7 +14,6 @@
 
 
 /************ NEURON IMPLEMENTATION *************/
-/*
 
 const long double Neuron::operator()(const long double input)  {
     data = input;
@@ -39,7 +41,6 @@ void Neuron::print(void) const {
 }
 
 /************ NEURAL NETWORK IMPLEMENTATION *******************/
-/*
 
 NeuralMatrix::NeuralMatrix(const size_t n, const size_t m = 1) : Matrix<Neuron *>(n, m) {
     register size_t i, j;
@@ -152,4 +153,3 @@ void NeuralMatrix::print(void) const { register size_t i, j;
 }
 
 #pragma clang diagnostic pop
-*/

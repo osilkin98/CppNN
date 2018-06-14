@@ -1,27 +1,16 @@
 //
 // Created by Oleg on 6/11/2018.
 //
-
+/*
 #ifndef NEURALNETWORKS_NEURAL_NETWORK_H
 #define NEURALNETWORKS_NEURAL_NETWORK_H
 
 #include "nn_utils.h"
 
-class NeuralLayer {
-public:
-    NeuralMatrix *data, *bias, *weights;
-
-    NeuralLayer(const size_t layer_size, const size_t previous_layer_size);
-
-    NeuralLayer(const NeuralLayer& other);
-
-    ~NeuralLayer(void);
-};
 
 class NeuralNetwork {
 private:
     std::vector<NeuralMatrix *> network;
-
 
 public:
 
@@ -41,3 +30,4 @@ public:
 
 
 #endif //NEURALNETWORKS_NEURAL_NETWORK_H
+*/

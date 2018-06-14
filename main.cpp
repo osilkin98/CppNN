@@ -1,5 +1,5 @@
 #include <iostream>
-#include "linear_algebra.h"
+#include "src/linear_algebra.h"
 // #include "linear_algebra.cpp"
 
 // #include "linear_algebra.cpp"

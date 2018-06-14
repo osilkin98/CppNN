@@ -1,4 +1,4 @@
-/*#ifndef LINEAR_ALGEBRA_H
+#ifndef LINEAR_ALGEBRA_H
 #define LINEAR_ALGEBRA_H
 
 #include <vector>
@@ -14,7 +14,7 @@ public:
     const bool valid(void) const { return N && M; }
 
 
-    const bool equal_size(Matrix<T>* other) const {
+    const bool equal_size(const Matrix<T>* other) const {
         return other -> N == N && other -> M == M;
     }
 
@@ -198,4 +198,3 @@ void Matrix<T>::print(void) const {
 
 #endif //NEURALNETWORKS_LINEAR_ALGEBRA_H
 #pragma clang diagnostic pop
- */

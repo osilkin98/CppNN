@@ -1,7 +1,7 @@
 //
 // Created by oleg on 6/4/18.
 //
-/*
+
 #include "linear_algebra.h"
 
 #ifndef NEURALNETWORK_UTILS_H
@@ -9,7 +9,7 @@
 
 
 /***** ACTIVATION FUNCTIONS ********/
-/*
+
 long double sigmoid(const long double input);
 
 long double sigmoid_derivative(const long double input);
@@ -72,4 +72,3 @@ public:
 
 
 #endif //NEURALNETWORKS_NN_UTILS_H
-*/

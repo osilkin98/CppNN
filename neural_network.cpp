@@ -1,3 +1,4 @@
+/*
 //
 // Created by Oleg on 6/11/2018.
 //
@@ -42,3 +43,5 @@ void NeuralNetwork::set_dimension(const size_t index, const int N, const int M =
         throw "Index out of Bounds!";
     }
 }
+
+ */
