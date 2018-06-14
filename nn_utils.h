@@ -48,21 +48,21 @@ struct Neuron {
 };
 
 
-class NeuralLayer : public Matrix<Neuron *> {
+class NeuralMatrix : public Matrix<Neuron *> {
 public:
 
 
-    NeuralLayer *operator*(const NeuralLayer *other) const;
+    NeuralMatrix *operator*(const NeuralMatrix *other) const;
 
-    NeuralLayer *hadamard_product(const NeuralLayer *other) const;
+    NeuralMatrix *hadamard_product(const NeuralMatrix *other) const;
 
-    NeuralLayer *operator+(const NeuralLayer *other) const;
+    NeuralMatrix *operator+(const NeuralMatrix *other) const;
 
-    NeuralLayer *operator-(const NeuralLayer *other) const;
+    NeuralMatrix *operator-(const NeuralMatrix *other) const;
 
-    NeuralLayer(const NeuralLayer& other);
+    NeuralMatrix(const NeuralMatrix& other);
 
-    NeuralLayer(const size_t n, const size_t m);
+    NeuralMatrix(const size_t n, const size_t m);
 
     void print(void) const;
 

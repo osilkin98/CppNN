@@ -39,7 +39,7 @@ void Neuron::print(void) const {
 
 /************ NEURAL NETWORK IMPLEMENTATION *******************/
 
-NeuralLayer::NeuralLayer(const size_t n, const size_t m = 1) : Matrix<Neuron *>(n, m) {
+NeuralMatrix::NeuralMatrix(const size_t n, const size_t m = 1) : Matrix<Neuron *>(n, m) {
     register size_t i, j;
     for(i = 0; i < N; ++i) {
         for(j = 0; j < M; ++j) {
@@ -48,9 +48,9 @@ NeuralLayer::NeuralLayer(const size_t n, const size_t m = 1) : Matrix<Neuron *>(
     }
 }
 
-NeuralLayer* NeuralLayer::operator*(const NeuralLayer *other) const {
+NeuralMatrix* NeuralMatrix::operator*(const NeuralMatrix *other) const {
     if(Matrix<Neuron *>::M == other -> N) {
-        NeuralLayer *new_layer = new NeuralLayer(Matrix<Neuron *>::N, other -> M);
+        NeuralMatrix *new_layer = new NeuralMatrix(Matrix<Neuron *>::N, other -> M);
         size_t i, j;
         register size_t k;
         for(i = 0; i < new_layer -> N; ++i) {
@@ -68,9 +68,9 @@ NeuralLayer* NeuralLayer::operator*(const NeuralLayer *other) const {
     }
 }
 
-NeuralLayer* NeuralLayer::hadamard_product(const NeuralLayer *other) const {
+NeuralMatrix* NeuralMatrix::hadamard_product(const NeuralMatrix *other) const {
     if(equal_size(other)) {
-        NeuralLayer *new_layer = new NeuralLayer(N, M);
+        NeuralMatrix *new_layer = new NeuralMatrix(N, M);
         register size_t i, j;
         for(i = 0; i < N; ++i) {
             for(j = 0; j < M; ++i) {
@@ -84,9 +84,9 @@ NeuralLayer* NeuralLayer::hadamard_product(const NeuralLayer *other) const {
     }
 }
 
-NeuralLayer * NeuralLayer::operator+(const NeuralLayer *other) const {
+NeuralMatrix * NeuralMatrix::operator+(const NeuralMatrix *other) const {
     if(equal_size(other)) {
-        NeuralLayer *new_layer = new NeuralLayer(N, M);
+        NeuralMatrix *new_layer = new NeuralMatrix(N, M);
         if(!new_layer) {
             std::cerr << "Error at " << this << ": cannot allocate new matrix, not enough space\n";
             return NULL;
@@ -105,9 +105,9 @@ NeuralLayer * NeuralLayer::operator+(const NeuralLayer *other) const {
     }
 }
 
-NeuralLayer *NeuralLayer::operator-(const NeuralLayer *other) const {
+NeuralMatrix *NeuralMatrix::operator-(const NeuralMatrix *other) const {
     if(equal_size(other)) {
-        NeuralLayer *new_layer = new NeuralLayer(N, M);
+        NeuralMatrix *new_layer = new NeuralMatrix(N, M);
         if(!new_layer) {
             std::cerr << "Error at " << this << ": cannot allocate new matrix, not enough space\n";
             return NULL;
@@ -126,7 +126,7 @@ NeuralLayer *NeuralLayer::operator-(const NeuralLayer *other) const {
     }
 }
 
-NeuralLayer::NeuralLayer(const NeuralLayer& other) : Matrix<Neuron *>(other.N, other.M) {
+NeuralMatrix::NeuralMatrix(const NeuralMatrix& other) : Matrix<Neuron *>(other.N, other.M) {
     register size_t i, j;
     for(i = 0; i < N; ++i) {
         for(j = 0; j < M; ++j) {
@@ -136,8 +136,8 @@ NeuralLayer::NeuralLayer(const NeuralLayer& other) : Matrix<Neuron *>(other.N, o
     }
 }
 
-void NeuralLayer::print(void) const { register size_t i, j;
-    std::cout << "Printing NeuralLayer object at " << this << ":\n";
+void NeuralMatrix::print(void) const { register size_t i, j;
+    std::cout << "Printing NeuralMatrix object at " << this << ":\n";
     for(i = 0; i < N; ++i) {
         std::cout << "[ ";
         for(j = 0; j < M; ++j) {
