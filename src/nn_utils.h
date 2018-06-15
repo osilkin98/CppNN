@@ -64,6 +64,8 @@ public:
 
     NeuralMatrix(const size_t n, const size_t m);
 
+    ~NeuralMatrix(void);
+
     void print(void) const;
 
 

@@ -44,7 +44,7 @@ public:
 
     void zero_matrix(void);
 
-    ~Matrix(void) = default;
+    virtual ~Matrix(void) = default;
 
     virtual void print(void) const;
 };

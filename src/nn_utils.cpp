@@ -51,7 +51,17 @@ NeuralMatrix::NeuralMatrix(const size_t n, const size_t m = 1) : Matrix<Neuron *
     }
 }
 
-NeuralMatrix* NeuralMatrix::operator*(const NeuralMatrix *other) const {
+NeuralMatrix::~NeuralMatrix() {
+    register size_t i, j;
+    for(i = 0; i < N; ++i) {
+        for(j = 0; j < M; ++j) {
+            delete matrix[i][j];
+            matrix[i][j] = NULL;
+        }
+    }
+}
+
+NeuralMatrix *NeuralMatrix::operator*(const NeuralMatrix *other) const {
     if(Matrix<Neuron *>::M == other -> N) {
         NeuralMatrix *new_layer = new NeuralMatrix(Matrix<Neuron *>::N, other -> M);
         size_t i, j;
@@ -71,7 +81,7 @@ NeuralMatrix* NeuralMatrix::operator*(const NeuralMatrix *other) const {
     }
 }
 
-NeuralMatrix* NeuralMatrix::hadamard_product(const NeuralMatrix *other) const {
+NeuralMatrix *NeuralMatrix::hadamard_product(const NeuralMatrix *other) const {
     if(equal_size(other)) {
         NeuralMatrix *new_layer = new NeuralMatrix(N, M);
         register size_t i, j;
@@ -87,7 +97,7 @@ NeuralMatrix* NeuralMatrix::hadamard_product(const NeuralMatrix *other) const {
     }
 }
 
-NeuralMatrix * NeuralMatrix::operator+(const NeuralMatrix *other) const {
+NeuralMatrix *NeuralMatrix::operator+(const NeuralMatrix *other) const {
     if(equal_size(other)) {
         NeuralMatrix *new_layer = new NeuralMatrix(N, M);
         if(!new_layer) {
