@@ -21,7 +21,7 @@ public:
 
     ~NeuralNetwork(void);
 
-
+    // virtual void feed_forward(void);
 };
 
 #endif //NEURALNETWORKS_NEURAL_NETWORK_H
