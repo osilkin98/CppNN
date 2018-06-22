@@ -13,13 +13,13 @@ private:
     std::vector< NeuralLayer *> layers;
 public:
 
-    NeuralNetwork(const size_t *dimensions, const size_t N);
+    virtual NeuralNetwork(const size_t *dimensions, size_t N);
 
-    NeuralNetwork(const std::vector<size_t>& dimensions);
+    virtual NeuralNetwork(const std::vector<size_t>& dimensions);
 
-    NeuralNetwork(const NeuralNetwork& other);
+    virtual NeuralNetwork(const NeuralNetwork& other);
 
-    ~NeuralNetwork(void);
+    virtual ~NeuralNetwork();
 
     // virtual void feed_forward(void);
 };
