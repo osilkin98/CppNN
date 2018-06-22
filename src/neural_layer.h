@@ -9,12 +9,12 @@
 
 class NeuralLayer {
 private:
-    void clean(void);
+    void clean();
 
     NeuralMatrix *data, *bias, *weights;
 
-
 public:
+    const size_t N;
 
     NeuralLayer& operator=(const NeuralLayer& other);
 
@@ -22,7 +22,7 @@ public:
 
     NeuralLayer(const NeuralLayer& other);
 
-    ~NeuralLayer(void);
+    ~NeuralLayer();
 
     friend class NeuralNetwork;
 };
