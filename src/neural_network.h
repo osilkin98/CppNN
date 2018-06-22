@@ -12,7 +12,9 @@ class NeuralNetwork {
 private:
     std::vector< NeuralLayer *> layers;
 
-    void set_data(const std::vector<long double>& data);
+    virtual void set_data(const std::vector<long double>& data) const;
+
+    virtual void feed_forward(void) const;
 public:
 
     virtual NeuralNetwork(const size_t *dimensions, size_t N);
@@ -23,7 +25,7 @@ public:
 
     virtual ~NeuralNetwork();
 
-    // virtual void feed_forward(void);
+
 };
 
 #endif //NEURALNETWORKS_NEURAL_NETWORK_H
