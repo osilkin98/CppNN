@@ -4,6 +4,7 @@
 
 #include "neural_network.h"
 
+/************ CONSTRUCTORS AND DESTRUCTORS *******************************/
 NeuralNetwork::NeuralNetwork(const size_t *dimensions, const size_t N) : layers(N, nullptr) {
     layers[0] = new NeuralLayer(dimensions[0], 0);
     for(register size_t i = 1; i < N; ++i) {
@@ -33,3 +34,18 @@ NeuralNetwork::~NeuralNetwork() {
         delete v;
     }
 }
+
+/********************** FUNCTIONS ******************************/
+
+void NeuralNetwork::set_data(const std::vector<long double> &data) {
+    if(data.size() != (*layers[0]).N ) { // our data vector is a different size than input layer
+        std::cerr << "Error in NeuralNetwork object at " << this << '\n';
+        throw "Input Data Length Mismatch";
+    } else {
+        const size_t N = data.size();
+        for(register size_t i = 0; i < N; ++i) {
+            layers[0] -> data -> matrix[i][0] -> data = data[i];
+        }
+    }
+}
+

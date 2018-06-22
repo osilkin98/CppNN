@@ -11,6 +11,8 @@
 class NeuralNetwork {
 private:
     std::vector< NeuralLayer *> layers;
+
+    void set_data(const std::vector<long double>& data);
 public:
 
     virtual NeuralNetwork(const size_t *dimensions, size_t N);
