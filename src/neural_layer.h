@@ -11,8 +11,10 @@ class NeuralLayer {
 private:
     void clean(void);
 
-public:
     NeuralMatrix *data, *bias, *weights;
+
+
+public:
 
     NeuralLayer& operator=(const NeuralLayer& other);
 
@@ -21,6 +23,8 @@ public:
     NeuralLayer(const NeuralLayer& other);
 
     ~NeuralLayer(void);
+
+    friend class NeuralNetwork;
 };
 
 
