@@ -13,9 +13,9 @@ private:
     std::vector< NeuralLayer *> layers;
 public:
 
-    NeuralNetwork(const int *dimensions, const size_t N);
+    NeuralNetwork(const size_t *dimensions, const size_t N);
 
-    NeuralNetwork(const std::vector<int> dimensions);
+    NeuralNetwork(const std::vector<size_t>& dimensions);
 
     NeuralNetwork(const NeuralNetwork& other);
 

@@ -9,11 +9,11 @@ void pointer_assign(const T& *prev_ptr, const T& *new_ptr);
 
 void NeuralLayer::clean(void) {
     delete data;
-    data = NULL;
+    data = nullptr;
     delete bias;
-    bias = NULL;
+    bias = nullptr;
     delete weights;
-    weights = NULL;
+    weights = nullptr;
 }
 
 NeuralLayer::NeuralLayer(const size_t layer_size, const size_t previous_layer_size = 0) {
@@ -22,8 +22,8 @@ NeuralLayer::NeuralLayer(const size_t layer_size, const size_t previous_layer_si
         weights = new NeuralMatrix(layer_size, previous_layer_size);
         bias = new NeuralMatrix(layer_size, 1);
     } else { // otherwise this is the first (input) layer, so we don't create weights + bias
-        bias = NULL;
-        weights = NULL;
+        bias = nullptr;
+        weights = nullptr;
     }
 }
 

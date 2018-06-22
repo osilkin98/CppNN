@@ -19,7 +19,6 @@ int main(void) {
     delete my_mat;
     return 0;
 
-
 /*
     srand(time(0));
     std::vector<Neuron *> neurons(5, NULL);

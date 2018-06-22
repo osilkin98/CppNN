@@ -55,7 +55,7 @@ public:
 template <typename T>
 Matrix<T> *Matrix<T>::transpose(Matrix<T>* other) const {
     if(!(other -> valid())) {
-        return NULL;
+        return nullptr;
     }
 
     Matrix<T> *transposed = new Matrix(other -> M, other -> N);
@@ -96,7 +96,7 @@ Matrix<T>* Matrix<T>::operator+(Matrix<T>* other) const {
         }
         return C;
     }
-    return NULL;
+    return nullptr;
 }
 
 template <typename T>
@@ -105,7 +105,7 @@ Matrix<T>* Matrix<T>::operator-(Matrix<T>* other) const {
         Matrix<T> *C = new Matrix<T>(N, M);
         if(!C) {
             std::cerr << "Failed to allocate matrix product\n";
-            return NULL;
+            return nullptr;
         }
         register size_t i, j;
         for(i = 0; i < N; ++i) {
@@ -115,7 +115,7 @@ Matrix<T>* Matrix<T>::operator-(Matrix<T>* other) const {
         }
         return C;
     }
-    return NULL;
+    return nullptr;
 }
 
 template <typename T>
@@ -124,7 +124,7 @@ Matrix<T>* Matrix<T>::hadamard_product(Matrix<T>* other) const {
         Matrix<T> *product = new Matrix(N, M);
         if(!product) {
             std::cerr << "hadamard_product: Failure to allocate new matrix\n";
-            return NULL;
+            return nullptr;
         }
         register size_t i, j;
         for(i = 0; i < N; ++i) {
@@ -134,7 +134,7 @@ Matrix<T>* Matrix<T>::hadamard_product(Matrix<T>* other) const {
         }
         return product;
     }
-    return NULL;
+    return nullptr;
 }
 
 
@@ -144,7 +144,7 @@ Matrix<T>* Matrix<T>::operator*(Matrix<T> *other) const {
         Matrix<T> *C  = new Matrix(N, other -> M);
         if(!C) {
             std::cerr << "Matrix Multiplication: Unable to allocate new matrix product\n";
-            return NULL;
+            return nullptr;
         }
         size_t i, j;
         register size_t k;
@@ -158,7 +158,7 @@ Matrix<T>* Matrix<T>::operator*(Matrix<T> *other) const {
         return C;
 
     } else {
-        return NULL;
+        return nullptr;
     }
 }
 

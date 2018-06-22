@@ -56,7 +56,7 @@ NeuralMatrix::~NeuralMatrix() {
     for(i = 0; i < N; ++i) {
         for(j = 0; j < M; ++j) {
             delete matrix[i][j];
-            matrix[i][j] = NULL;
+            matrix[i][j] = nullptr;
         }
     }
 }
@@ -77,7 +77,7 @@ NeuralMatrix *NeuralMatrix::operator*(const NeuralMatrix *other) const {
         return new_layer;
     } else {
         std::cerr << "Matrix Multiplication: Dimensions Mismatched\n";
-        return NULL;
+        return nullptr;
     }
 }
 
@@ -93,7 +93,7 @@ NeuralMatrix *NeuralMatrix::hadamard_product(const NeuralMatrix *other) const {
         return new_layer;
     } else {
         std::cerr << "Error: Hadamard product for:"  << this << ", dimension mismatched with " << other << "\n";
-        return NULL;
+        return nullptr;
     }
 }
 
@@ -102,7 +102,7 @@ NeuralMatrix *NeuralMatrix::operator+(const NeuralMatrix *other) const {
         NeuralMatrix *new_layer = new NeuralMatrix(N, M);
         if(!new_layer) {
             std::cerr << "Error at " << this << ": cannot allocate new matrix, not enough space\n";
-            return NULL;
+            return nullptr;
         }
         register size_t i, j;
 
@@ -114,7 +114,7 @@ NeuralMatrix *NeuralMatrix::operator+(const NeuralMatrix *other) const {
         return new_layer;
     } else {
         std::cerr << "Error adding [" << other << "] to [" << this << "]: Dimension Mismatch\n";
-        return NULL;
+        return nullptr;
     }
 }
 
@@ -123,7 +123,7 @@ NeuralMatrix *NeuralMatrix::operator-(const NeuralMatrix *other) const {
         NeuralMatrix *new_layer = new NeuralMatrix(N, M);
         if(!new_layer) {
             std::cerr << "Error at " << this << ": cannot allocate new matrix, not enough space\n";
-            return NULL;
+            return nullptr;
         }
         register size_t i, j;
 
@@ -135,7 +135,7 @@ NeuralMatrix *NeuralMatrix::operator-(const NeuralMatrix *other) const {
         return new_layer;
     } else {
         std::cerr << "Error subtracting [" << other << "] to [" << this << "]: Dimension Mismatch\n";
-        return NULL;
+        return nullptr;
     }
 }
 
