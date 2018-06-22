@@ -5,7 +5,7 @@
 #ifndef NEURALNETWORKS_NEURAL_NETWORK_H
 #define NEURALNETWORKS_NEURAL_NETWORK_H
 
-#include "NeuralLayer.h"
+#include "neural_layer.h"
 #include <vector>
 
 class NeuralNetwork {

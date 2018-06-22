@@ -2,7 +2,7 @@
 // Created by Oleg on 6/14/2018.
 //
 
-#include "NeuralLayer.h"
+#include "neural_layer.h"
 
 template <typename T>
 void pointer_assign(const T& *prev_ptr, const T& *new_ptr);
