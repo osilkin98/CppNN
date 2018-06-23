@@ -4,8 +4,6 @@
 
 #include "neural_layer.h"
 
-template <typename T>
-void pointer_assign(const T& *prev_ptr, const T& *new_ptr);
 
 void NeuralLayer::clean(void) {
     delete data;
@@ -56,9 +54,17 @@ NeuralLayer::~NeuralLayer(void) {
 }
 
 NeuralLayer& NeuralLayer::operator=(const NeuralLayer& other) {
-    pointer_assign(bias, other.bias);
-    pointer_assign(weights, other.weights);
-    pointer_assign(data, other.data);
+    NeuralMatrix *temp = weights;
+    weights = other.weights;
+    delete temp;
+    temp = bias;
+    bias = other.bias;
+    delete temp;
+    temp = data;
+    data = other.data;
+    delete temp;
+    temp = nullptr;
+
 }
 
 void NeuralLayer::update(const NeuralLayer &other) const {
@@ -90,10 +96,3 @@ void NeuralLayer::update(const NeuralLayer &other) const {
     }
 }
 
-/* */
-template <typename T>
-void pointer_assign(const T& *old_ptr, const T& *new_ptr) {
-    T *temp = old_ptr;
-    old_ptr = new_ptr;
-    delete temp;
-}
