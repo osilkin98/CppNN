@@ -35,7 +35,7 @@ NeuralNetwork::~NeuralNetwork() {
     }
 }
 
-/********************** FUNCTIONS ******************************/
+/*************************************** FUNCTIONS *************************************/
 
 // sets data using vector container
 void NeuralNetwork::set_data(const std::vector<long double> &data) const {
@@ -80,6 +80,7 @@ void NeuralNetwork::feed_forward(void) const {
     }
 }
 
+/* ACCESSOR METHODS ENABLE THE USER TO DEBUG THEIR NEURAL NETWORK BY ACCESSING SPECIFIC LAYERS */
 
 const NeuralLayer* NeuralNetwork::operator[](const size_t index) const {
     if(index < layers.size()) {
@@ -90,6 +91,7 @@ const NeuralLayer* NeuralNetwork::operator[](const size_t index) const {
         return nullptr;
     }
 }
+
 
 NeuralLayer* NeuralNetwork::operator[](const size_t index) {
     if(index < layers.size()) {
