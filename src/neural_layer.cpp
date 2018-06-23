@@ -78,6 +78,15 @@ void NeuralLayer::update(const NeuralLayer &other) const {
             }
             data -> matrix[elem][0] -> set(sum);
         }
+    } else {
+        for(register size_t elem = 0; elem < N; ++elem) {
+            sum = 0 + bias -> matrix[elem][0] -> data;
+            for(i = 0; i < bias -> M; ++i) {
+                sum += weights -> matrix[elem][i] -> data *
+                       other.data -> matrix[i][0] -> data;
+            }
+            data -> matrix[elem][0] -> set(sum);
+        }
     }
 }
 
