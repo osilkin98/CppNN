@@ -63,7 +63,7 @@ void NeuralNetwork::set_data(const long double *data, const size_t N) const {
 }
 
 // creates a copy of the Neural Network's produced data
-std::vector<long double>& NeuralNetwork::get_data_vector() const {
+std::vector<long double> NeuralNetwork::get_data_vector() const {
     size_t access = layers.size() - 1;
     size_t N = layers[access] -> N;
     std::vector<long double> data(N);
