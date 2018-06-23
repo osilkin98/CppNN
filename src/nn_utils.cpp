@@ -26,6 +26,13 @@ const long double Neuron::operator()(void) {
     return function;
 }
 
+const long double Neuron::set(const Neuron::ld input) {
+    data = input;
+    function = activation_function(input);
+    function_derivative = activation_function_prime(input);
+    return function;
+}
+
 const long double Neuron::activation_function(const long double input) const {
     return exp(input) / (exp(input) + 1);
 }

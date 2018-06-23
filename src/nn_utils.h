@@ -25,19 +25,21 @@ struct Neuron {
     long double data, function, function_derivative;
 
     // returns the activation of the function
-    const ld operator()(void);
+    virtual const ld operator()(void);
 
-    const ld operator()(const ld input);
+    virtual const ld operator()(const ld input);
 
-    const ld activation_function(const ld input) const;
+    virtual const ld set(const ld input);
 
-    const ld activation_function_prime(const ld input) const;
+    virtual const ld activation_function(const ld input) const;
 
-    void print(void) const;
+    virtual const ld activation_function_prime(const ld input) const;
 
-    Neuron(void) : data(0), function(0.5), function_derivative(0.25) {}
+    virtual void print(void) const;
 
-    Neuron(const long double input) : data(input),
+    virtual Neuron(void) : data(0), function(0.5), function_derivative(0.25) {}
+
+    virtual Neuron(const long double input) : data(input),
                                       function(activation_function(input)),
                                       function_derivative(activation_function_prime(input))
     { }
