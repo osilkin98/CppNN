@@ -96,3 +96,15 @@ void NeuralLayer::update(const NeuralLayer &other) const {
     }
 }
 
+
+void NeuralLayer::print() const {
+    std::cout << "\nData Vector: " << data << "\n\n";
+    data -> print();
+    if(bias) {
+        std::cout << "\nWeight Matrix: " << weights << "\n\n";
+        weights -> print();
+        std::cout << "\nBias Vector: " << bias << "\n\n";
+        bias -> print();
+    }
+    std::cout << std::endl;
+}
