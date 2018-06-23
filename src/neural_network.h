@@ -24,7 +24,7 @@ public:
 
     virtual NeuralNetwork(const size_t *dimensions, size_t N);
 
-    virtual NeuralNetwork(const std::vector<size_t>& dimensions);
+    virtual explicit NeuralNetwork(const std::vector<size_t>& dimensions);
 
     virtual NeuralNetwork(const NeuralNetwork& other);
 
