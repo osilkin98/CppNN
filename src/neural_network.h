@@ -40,6 +40,8 @@ public:
 
     virtual NeuralLayer *operator[](const size_t index);
 
+    void print_all(void) const;
+
 };
 
 #endif //NEURALNETWORKS_NEURAL_NETWORK_H

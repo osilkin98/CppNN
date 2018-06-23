@@ -102,3 +102,10 @@ NeuralLayer* NeuralNetwork::operator[](const size_t index) {
         return nullptr;
     }
 }
+
+/* PRINT FUNCTION FOR DEBUGGING */
+void NeuralNetwork::print_all(void) const {
+    for(size_t i = 0; i < layers.size(); ++i) {
+        layers[i] -> print();
+    }
+}
