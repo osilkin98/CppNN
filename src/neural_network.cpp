@@ -80,3 +80,23 @@ void NeuralNetwork::feed_forward(void) const {
     }
 }
 
+
+const NeuralLayer* NeuralNetwork::operator[](const size_t index) const {
+    if(index < layers.size()) {
+        return layers[index];
+    } else {
+        std::cerr << "Error at " << this << ": Index passed in (" << index << ") is larger \
+        than NeuralNetwork size (" << layers.size() << ")\n";
+        return nullptr;
+    }
+}
+
+NeuralLayer* NeuralNetwork::operator[](const size_t index) {
+    if(index < layers.size()) {
+        return layers[index];
+    } else {
+        std::cerr << "Error at " << this << ": Index passed in (" << index << ") is larger \
+        than NeuralNetwork size (" << layers.size() << ")\n";
+        return nullptr;
+    }
+}

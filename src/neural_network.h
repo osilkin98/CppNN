@@ -30,7 +30,13 @@ public:
 
     virtual ~NeuralNetwork();
 
+    // to get a copy of the final data
     std::vector<long double>& get_data_vector(void) const;
+
+    // to be able to index a certain layer of the network
+    const NeuralLayer* operator[](const size_t index) const;
+
+    NeuralLayer *operator[](const size_t index);
 
 };
 
