@@ -37,6 +37,7 @@ NeuralNetwork::~NeuralNetwork() {
 
 /********************** FUNCTIONS ******************************/
 
+// sets data using vector container
 void NeuralNetwork::set_data(const std::vector<long double> &data) const {
     if(data.size() != (*layers[0]).N ) { // our data vector is a different size than input layer
         std::cerr << "Error in NeuralNetwork object at " << this << '\n';
@@ -48,6 +49,23 @@ void NeuralNetwork::set_data(const std::vector<long double> &data) const {
         }
     }
 }
+
+// sets data using traditional C-styled array containers
+void NeuralNetwork::set_data(const long double *data, const size_t N) const {
+    if(N != (*layers[0]).N) {
+        std::cerr << "Error in NeuralNetwork object at " << this << '\n';
+        throw "Input Data Length Mismatch";
+    } else {
+        for(register size_t i = 0; i < N; ++i) {
+            layers[0] -> data -> matrix[i][0] -> data = data[i];
+        }
+    }
+}
+
+std::vector<long double>& NeuralNetwork::get_data_vector() const {
+
+}
+
 
 void NeuralNetwork::feed_forward(void) const {
     for(register size_t i = 1; i < layers.size(); ++i) {
