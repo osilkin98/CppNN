@@ -18,9 +18,9 @@ public:
 
     NeuralLayer& operator=(const NeuralLayer& other);
 
-    virtual NeuralLayer(const size_t layer_size, const size_t previous_layer_size);
+    NeuralLayer(const size_t layer_size, const size_t previous_layer_size);
 
-    virtual NeuralLayer(const NeuralLayer& other);
+    NeuralLayer(const NeuralLayer& other);
 
     ~NeuralLayer();
 

@@ -8,19 +8,13 @@
 int main(void) {
     std::vector<size_t> sizes = {3, 4, 2};
     NeuralNetwork NN(sizes);
-
-
-/*
-    srand(time(0));
-    std::vector<Neuron *> neurons(5, NULL);
-    for(int i = 0; i < 5; ++i) {
-        neurons[i] = new Neuron(-2 + ((double)rand()/RAND_MAX) * (4));
-        neurons[i] -> print();
+    std::vector<long double> data = {1, 2, 3};
+    NN.set_data(data);
+    NN.feed_forward();
+    std::vector<long double> back_data = NN.get_data_vector();
+    for(size_t i = 0; i < back_data.size(); ++i) {
+        std::cout << back_data[i] << " ";
     }
-    for(int i = 0; i < 5; ++i) {
-        delete neurons[i];
-        neurons[i] = NULL;
-    }
-*/
-
+    std::cout << std::endl;
+    return 0;
 }

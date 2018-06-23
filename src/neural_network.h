@@ -24,11 +24,11 @@ public:
     virtual void feed_forward(void) const;
 
 
-    virtual NeuralNetwork(const size_t *dimensions, size_t N);
+    NeuralNetwork(const size_t *dimensions, size_t N);
 
-    virtual explicit NeuralNetwork(const std::vector<size_t>& dimensions);
+    explicit NeuralNetwork(const std::vector<size_t>& dimensions);
 
-    virtual NeuralNetwork(const NeuralNetwork& other);
+    NeuralNetwork(const NeuralNetwork& other);
 
     virtual ~NeuralNetwork();
 
