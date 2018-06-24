@@ -26,6 +26,7 @@ public:
     // forward-propogation routine, this is written to be very abstracted
     virtual void feed_forward(void) const;
 
+    virtual void back_propogate(const std::vector<long double>& correct_data) const;
     /* labels for constructors are optional */
 
     NeuralNetwork(const size_t *dimensions, size_t N, std::string new_label);

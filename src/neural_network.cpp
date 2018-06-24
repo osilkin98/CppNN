@@ -111,3 +111,9 @@ void NeuralNetwork::print_all(void) const {
         layers[i] -> print();
     }
 }
+
+
+/* Simple Back-propogation routine, an amortized lookup table in order to avoid recursive overhead */
+void NeuralNetwork::back_propogate(const std::vector<long double> &correct_data) const {
+
+}
