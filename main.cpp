@@ -15,8 +15,26 @@ int main(void) {
     }
     one -> print();
     two -> print();
+    std::cout << one << " (*) " << two << std::endl;
     NeuralMatrix *three = one -> hadamard_product(two);
     three -> print();
+    delete three;
+    three = nullptr;
+    std::cout << one << " + " << two << std::endl;
+    three = *one + two;
+    three -> print();
+    delete three;
+    three = nullptr;
+    std::cout << one << " - " << two << std::endl;
+    three = *one - two;
+    three -> print();
+    delete three;
+    three = nullptr;
+    std::cout << one << " * " << two << std::endl;
+    three = *one * two;
+    if(three != nullptr)
+        three -> print();
+
     delete one;
     delete two;
     delete three;

@@ -16,7 +16,9 @@ private:
 public:
     const size_t N;
 
+    // operator to assign one neural layer object to another
     NeuralLayer& operator=(const NeuralLayer& other);
+
 
     NeuralLayer(const size_t layer_size, const size_t previous_layer_size);
 

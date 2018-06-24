@@ -151,8 +151,7 @@ Matrix<T>* Matrix<T>::operator*(Matrix<T> *other) const {
         for(i = 0; i < N; ++i) {
             for(j = 0; j < other -> M; ++j) {
                 for(k = 0; k < M; ++k) {
-                    C -> matrix[i][j] += matrix[i][k] * other -> matrix[k][j];
-                }
+                    C -> matrix[i][j] += matrix[i][k] * other -> matrix[k][j]; }
             }
         }
         return C;
