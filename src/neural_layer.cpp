@@ -68,8 +68,8 @@ NeuralLayer& NeuralLayer::operator=(const NeuralLayer& other) {
 }
 
 void NeuralLayer::update(const NeuralLayer &other) const {
-    if(bias -> M != other.data -> N) {
-        std::cerr << "During update operation, bias M [" << bias -> M << "] at " << bias
+    if(weights -> M != other.data -> N) {
+        std::cerr << "During update operation, bias M [" << bias -> N << "] at " << bias
         << " in object " << this << " does not match input vector size N [" << other.data -> N
         << "] at " << other.data << '\n';
     }

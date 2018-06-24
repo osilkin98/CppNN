@@ -42,9 +42,12 @@ const long double Neuron::activation_function_prime(const long double input) con
 }
 
 void Neuron::print(void) const {
+    /*
     std::cout << '\n' << this << ": {\n";
     std::cout << "\tx: " << data << "\n\tσ(x): "
               << function << "\n\tσ'(x): " << function_derivative << "\n};\n";
+              */
+    std::cout << data << " ";
 }
 
 /************ NEURAL NETWORK IMPLEMENTATION *******************/
