@@ -5,15 +5,16 @@
 #include "neural_network.h"
 
 /************ CONSTRUCTORS AND DESTRUCTORS *******************************/
-NeuralNetwork::NeuralNetwork(const size_t *dimensions, const size_t N) : layers(N, nullptr) {
+NeuralNetwork::NeuralNetwork(const size_t *dimensions, const size_t N, std::string new_label = std::string())
+        : layers(N, nullptr), label(new_label) {
     layers[0] = new NeuralLayer(dimensions[0], 0);
     for(register size_t i = 1; i < N; ++i) {
         layers[i] = new NeuralLayer(dimensions[i], dimensions[i - 1]);
     }
 }
 
-NeuralNetwork::NeuralNetwork(const std::vector<size_t>& dimensions) :
-        layers(dimensions.size(), nullptr) {
+NeuralNetwork::NeuralNetwork(const std::vector<size_t>& dimensions, std::string new_label = std::string()) :
+        layers(dimensions.size(), nullptr), label(new_label) {
     layers[0] = new NeuralLayer(dimensions[0], 0);
     for(register size_t i = 1; i < dimensions.size(); ++i) {
         layers[i] = new NeuralLayer(dimensions[i], dimensions[i - 1]);
