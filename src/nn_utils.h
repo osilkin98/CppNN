@@ -70,6 +70,13 @@ public:
 
     void print(void) const;
 
+    long double& at(const size_t i, const size_t j = 0) {
+        if(i < N && j < M) {
+            return matrix[i][j] -> data;
+        } else {
+            std::cerr << "Dimension mismatch, (" << i << ", " << j << ") is out of bounds.\n";
+        }
+    }
 
 };
 

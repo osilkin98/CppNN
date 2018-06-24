@@ -92,14 +92,17 @@ NeuralMatrix *NeuralMatrix::operator*(const NeuralMatrix *other) const {
 }
 
 NeuralMatrix *NeuralMatrix::hadamard_product(const NeuralMatrix *other) const {
-    if(equal_size(other)) {
+    if(equal_size(*other)) {
         NeuralMatrix *new_layer = new NeuralMatrix(N, M);
         register size_t i, j;
+        std::cerr << "Computing hadamard product for the following indices: ";
         for(i = 0; i < N; ++i) {
-            for(j = 0; j < M; ++i) {
-                new_layer -> matrix[i][j] -> data = this -> matrix[i][j] -> data * other -> matrix[i][j] -> data;
+            for(j = 0; j < M; ++j) {
+                std::cerr << "(" << i << ", " << j << ") ";
+                new_layer -> at(i, j) = this -> matrix[i][j] -> data * other -> matrix[i][j] -> data;
             }
         }
+        std::cerr << "\n";
         return new_layer;
     } else {
         std::cerr << "Error: Hadamard product for:"  << this << ", dimension mismatched with " << other << "\n";
@@ -108,7 +111,7 @@ NeuralMatrix *NeuralMatrix::hadamard_product(const NeuralMatrix *other) const {
 }
 
 NeuralMatrix *NeuralMatrix::operator+(const NeuralMatrix *other) const {
-    if(equal_size(other)) {
+    if(equal_size(*other)) {
         NeuralMatrix *new_layer = new NeuralMatrix(N, M);
         if(!new_layer) {
             std::cerr << "Error at " << this << ": cannot allocate new matrix, not enough space\n";
@@ -129,7 +132,7 @@ NeuralMatrix *NeuralMatrix::operator+(const NeuralMatrix *other) const {
 }
 
 NeuralMatrix *NeuralMatrix::operator-(const NeuralMatrix *other) const {
-    if(equal_size(other)) {
+    if(equal_size(*other)) {
         NeuralMatrix *new_layer = new NeuralMatrix(N, M);
         if(!new_layer) {
             std::cerr << "Error at " << this << ": cannot allocate new matrix, not enough space\n";

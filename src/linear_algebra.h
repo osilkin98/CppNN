@@ -11,11 +11,11 @@ public:
     std::vector< std::vector<T> > matrix;
     size_t N, M;
 
-    const bool valid(void) const { return N && M; }
+    virtual const bool valid(void) const { return N && M; }
 
 
-    const bool equal_size(const Matrix<T>* other) const {
-        return other -> N == N && other -> M == M;
+    virtual const bool equal_size(const Matrix<T>& other) const {
+        return other.N == N && other.M == M;
     }
 
     // operator for matrix multiplication
@@ -86,7 +86,7 @@ Matrix<T>* Matrix<T>::transpose(void) {
 
 template <typename T>
 Matrix<T>* Matrix<T>::operator+(Matrix<T>* other) const {
-    if(this -> equal_size(other)) {
+    if(this -> equal_size(*other)) {
         Matrix<T> *C = new Matrix<T>(N, M);
         register size_t i, j;
         for(i = 0; i < N; ++i) {
@@ -101,7 +101,7 @@ Matrix<T>* Matrix<T>::operator+(Matrix<T>* other) const {
 
 template <typename T>
 Matrix<T>* Matrix<T>::operator-(Matrix<T>* other) const {
-    if(this -> equal_size(other)) {
+    if(this -> equal_size(*other)) {
         Matrix<T> *C = new Matrix<T>(N, M);
         if(!C) {
             std::cerr << "Failed to allocate matrix product\n";
@@ -151,7 +151,7 @@ Matrix<T>* Matrix<T>::operator*(Matrix<T> *other) const {
         for(i = 0; i < N; ++i) {
             for(j = 0; j < other -> M; ++j) {
                 for(k = 0; k < M; ++k) {
-                    C -> matrix[i][j] += matrix[i][k] * matrix[k][j];
+                    C -> matrix[i][j] += matrix[i][k] * other -> matrix[k][j];
                 }
             }
         }

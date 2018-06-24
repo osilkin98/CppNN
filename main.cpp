@@ -6,6 +6,22 @@
 // #include "linear_algebra.cpp"
 
 int main(void) {
+    NeuralMatrix *one = new NeuralMatrix(4, 1), *two = new NeuralMatrix(4, 1);
+    one -> print();
+    two -> print();
+    for(int i = 0; i < 4; ++i) {
+        one -> at(i) = static_cast<long double>(i+1);
+        two -> at(i) = static_cast<long double>((i + 1) * 2);
+    }
+    one -> print();
+    two -> print();
+    NeuralMatrix *three = one -> hadamard_product(two);
+    three -> print();
+    delete one;
+    delete two;
+    delete three;
+
+    /*
     std::vector<size_t> sizes = {3, 4, 2};
     NeuralNetwork NN(sizes);
     std::vector<long double> data = {1, 2, 3};
@@ -17,5 +33,7 @@ int main(void) {
         std::cout << back_data[i] << " ";
     }
     std::cout << std::endl;
+    return 0;
+     */
     return 0;
 }
