@@ -19,16 +19,16 @@ public:
     }
 
     // operator for matrix multiplication
-    Matrix<T>* operator*(Matrix<T>* other) const;
+    Matrix<T>* operator*(Matrix<T>& other) const;
 
-    Matrix<T>* hadamard_product(Matrix<T>* other) const;
+    Matrix<T>* hadamard_product(Matrix<T>& other) const;
 
-    Matrix<T>* operator+(Matrix<T>* other) const;
+    Matrix<T>* operator+(Matrix<T>& other) const;
 
-    Matrix<T>* operator-(Matrix<T>* other) const;
+    Matrix<T>* operator-(Matrix<T>& other) const;
 
     // for transposing other matrices
-    Matrix<T> *transpose(Matrix<T>* other) const;
+    Matrix<T> *transpose(Matrix<T>& other) const;
 
     // for transposing this matrix
     Matrix<T> *transpose(void);
@@ -53,18 +53,18 @@ public:
 #pragma ide diagnostic ignored "OCDFAInspection"
 
 template <typename T>
-Matrix<T> *Matrix<T>::transpose(Matrix<T>* other) const {
-    if(!(other -> valid())) {
+Matrix<T> *Matrix<T>::transpose(Matrix<T>& other) const {
+    if(!(other.valid())) {
         return nullptr;
     }
 
-    Matrix<T> *transposed = new Matrix(other -> M, other -> N);
+    Matrix<T> *transposed = new Matrix(other.M, other.N);
 
     register size_t i, j;
 
-    for(i = 0; i < other -> N; ++i) {
-        for(j = 0; j < other -> M; ++j) {
-            transposed -> matrix[j][i] = other -> matrix[i][j];
+    for(i = 0; i < other.N; ++i) {
+        for(j = 0; j < other.M; ++j) {
+            transposed -> matrix[j][i] = other.matrix[i][j];
         }
     }
     return transposed;
@@ -85,13 +85,13 @@ Matrix<T>* Matrix<T>::transpose(void) {
 }
 
 template <typename T>
-Matrix<T>* Matrix<T>::operator+(Matrix<T>* other) const {
-    if(this -> equal_size(*other)) {
+Matrix<T>* Matrix<T>::operator+(Matrix<T>& other) const {
+    if(this -> equal_size(other)) {
         Matrix<T> *C = new Matrix<T>(N, M);
         register size_t i, j;
         for(i = 0; i < N; ++i) {
             for(j = 0; j < M; ++j) {
-                C -> matrix[i][j] = matrix[i][j] + other -> matrix[i][j];
+                C -> matrix[i][j] = matrix[i][j] + other.matrix[i][j];
             }
         }
         return C;
@@ -100,8 +100,8 @@ Matrix<T>* Matrix<T>::operator+(Matrix<T>* other) const {
 }
 
 template <typename T>
-Matrix<T>* Matrix<T>::operator-(Matrix<T>* other) const {
-    if(this -> equal_size(*other)) {
+Matrix<T>* Matrix<T>::operator-(Matrix<T>& other) const {
+    if(this -> equal_size(other)) {
         Matrix<T> *C = new Matrix<T>(N, M);
         if(!C) {
             std::cerr << "Failed to allocate matrix product\n";
@@ -110,7 +110,7 @@ Matrix<T>* Matrix<T>::operator-(Matrix<T>* other) const {
         register size_t i, j;
         for(i = 0; i < N; ++i) {
             for(j = 0; j < M; ++j) {
-                C -> matrix[i][j] = matrix[i][j] - other -> matrix[i][j];
+                C -> matrix[i][j] = matrix[i][j] - other.matrix[i][j];
             }
         }
         return C;
@@ -119,8 +119,8 @@ Matrix<T>* Matrix<T>::operator-(Matrix<T>* other) const {
 }
 
 template <typename T>
-Matrix<T>* Matrix<T>::hadamard_product(Matrix<T>* other) const {
-    if(N == other -> N && M == other -> M) {
+Matrix<T>* Matrix<T>::hadamard_product(Matrix<T>& other) const {
+    if(N == other.N && M == other.M) {
         Matrix<T> *product = new Matrix(N, M);
         if(!product) {
             std::cerr << "hadamard_product: Failure to allocate new matrix\n";
@@ -129,7 +129,7 @@ Matrix<T>* Matrix<T>::hadamard_product(Matrix<T>* other) const {
         register size_t i, j;
         for(i = 0; i < N; ++i) {
             for(j = 0; j < M; ++j) {
-                product -> matrix[i][j] = matrix[i][j] * other -> matrix[i][j];
+                product -> matrix[i][j] = matrix[i][j] * other.matrix[i][j];
             }
         }
         return product;
@@ -139,9 +139,9 @@ Matrix<T>* Matrix<T>::hadamard_product(Matrix<T>* other) const {
 
 
 template <typename T>
-Matrix<T>* Matrix<T>::operator*(Matrix<T> *other) const {
-    if(M == other -> N) {
-        Matrix<T> *C  = new Matrix(N, other -> M);
+Matrix<T>* Matrix<T>::operator*(Matrix<T>& other) const {
+    if(M == other.N) {
+        Matrix<T> *C  = new Matrix(N, other.M);
         if(!C) {
             std::cerr << "Matrix Multiplication: Unable to allocate new matrix product\n";
             return nullptr;
@@ -149,9 +149,9 @@ Matrix<T>* Matrix<T>::operator*(Matrix<T> *other) const {
         size_t i, j;
         register size_t k;
         for(i = 0; i < N; ++i) {
-            for(j = 0; j < other -> M; ++j) {
+            for(j = 0; j < other.M; ++j) {
                 for(k = 0; k < M; ++k) {
-                    C -> matrix[i][j] += matrix[i][k] * other -> matrix[k][j];
+                    C -> matrix[i][j] += matrix[i][k] * other.matrix[k][j];
                 }
             }
         }
