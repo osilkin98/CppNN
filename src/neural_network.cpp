@@ -192,9 +192,7 @@ void NeuralNetwork::back_propogate(const std::vector<long double> &correct_data)
         std::cerr << "Error: the 0th index of error_vector non-null\n";
     }
 
-    for(temp : error_vectors) {
-        if(temp != nullptr)
-            delete temp;
-
+    for(auto& item : error_vectors) {
+        delete item;
     }
 }

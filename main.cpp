@@ -9,11 +9,9 @@ int main(void) {
 
 
 
-    std::vector<long double> sizes = {3, 4, 2};
-    NeuralMatrix *one = new NeuralMatrix(sizes);
-    one -> print();
-    delete one;
-    /*NeuralNetwork NN(sizes);
+    std::vector<size_t> sizes = {3, 4, 2};
+
+    NeuralNetwork NN(sizes);
     std::vector<long double> data = {1, 2, 3};
     NN.set_data(data);
     NN.feed_forward();
@@ -23,7 +21,7 @@ int main(void) {
         std::cout << back_data[i] << " ";
     }
     std::cout << std::endl;
-    */
+
     return 0;
 
 
