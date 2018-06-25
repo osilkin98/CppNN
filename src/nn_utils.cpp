@@ -71,7 +71,7 @@ Neuron* Neuron::copy(void) const {
 
 /***** CONSTRUCTORS **********/
 
-NeuralMatrix::NeuralMatrix(const std::vector<long double> &vec) : N(vec.size()), M(1), matrix(vec.size(), std::vector<Neuron*>(1, nullptr)){
+NeuralMatrix::NeuralMatrix(const std::vector<long double> &vec) : Matrix<Neuron* >(vec.size(), 1) {
     register size_t i;
     for(i = 0; i < N; ++i) {
         matrix[i][0] = new Neuron(vec[i]);
@@ -79,7 +79,7 @@ NeuralMatrix::NeuralMatrix(const std::vector<long double> &vec) : N(vec.size()),
 }
 
 NeuralMatrix::NeuralMatrix(const std::vector<std::vector<long double> > &matrix_other)
-        : N(matrix_other.size()), M(matrix_other.size()), matrix(N, std::vector<Neuron *>(M, nullptr)) {
+        : Matrix<Neuron *>(matrix_other.size(), matrix_other[0].size()) {
     register size_t i, j;
     for(i = 0; i < N; ++i) {
         if(matrix_other[i].size() != M) {
@@ -92,6 +92,7 @@ NeuralMatrix::NeuralMatrix(const std::vector<std::vector<long double> > &matrix_
 
 }
 
+// pointers are not initialized in the Matrix<Neuron *> call
 NeuralMatrix::NeuralMatrix(const size_t n, const size_t m, bool is_null) : Matrix<Neuron *>(n, m) {
     if(!is_null) {
         // size_t sum = 0;
@@ -106,7 +107,7 @@ NeuralMatrix::NeuralMatrix(const size_t n, const size_t m, bool is_null) : Matri
         // std::cout << "Allocated " << sum << "B of memory at " << this << "\n";
     }
 }
-
+// deconstructor
 NeuralMatrix::~NeuralMatrix() {
     register size_t i, j;
     // size_t sum = 0;
