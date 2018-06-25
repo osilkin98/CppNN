@@ -48,7 +48,11 @@ public:
 
     virtual NeuralLayer *operator[](size_t index);
 
+    // to access the learning rate
+    long double get_learning_rate() const { return learning_rate; }
 
+    // to change it
+    void set_learning_rate(const long double rate) { learning_rate = rate; }
 
     void print_all() const;
 
