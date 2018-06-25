@@ -205,7 +205,18 @@ void NeuralMatrix::print(void) const { register size_t i, j;
 }
 
 NeuralMatrix* NeuralMatrix::transpose(void) const {
-    NeuralMatrix* copy = new NeuralMatrix(M, N);
+    NeuralMatrix *copy = new NeuralMatrix(M, N, true);
+    if(copy == nullptr) {
+        std::cerr << "Error: Memory Allocation Failed at " << this << '\n';
+        return nullptr;
+    }
+    register size_t i, j;
+    for(i = 0; i < N; ++i) {
+        for(j = 0; j < M; ++j) {
+            copy -> matrix[j][i] = matrix[i][j] -> copy();
+        }
+    }
+    return copy;
 
 }
 

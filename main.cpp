@@ -16,7 +16,7 @@ int main(void) {
     one -> print();
     two -> print();
     /*std::cout << one << " (*) " << two << std::endl;*/
-    NeuralMatrix *three = NeuralMatrix::transpose(two);
+    NeuralMatrix *three = two -> transpose();
 
     if(three != nullptr) {
         three->print();
