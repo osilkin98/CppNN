@@ -69,23 +69,30 @@ Neuron* Neuron::copy(void) const {
 
 NeuralMatrix::NeuralMatrix(const size_t n, const size_t m, bool is_null) : Matrix<Neuron *>(n, m) {
     if(!is_null) {
+        // size_t sum = 0;
         register size_t i, j;
         for (i = 0; i < N; ++i) {
             for (j = 0; j < M; ++j) {
+
                 this->matrix[i][j] = new Neuron;
+                // sum += sizeof(matrix[i][j]);
             }
         }
+        // std::cout << "Allocated " << sum << "B of memory at " << this << "\n";
     }
 }
 
 NeuralMatrix::~NeuralMatrix() {
     register size_t i, j;
+    // size_t sum = 0;
     for(i = 0; i < N; ++i) {
         for(j = 0; j < M; ++j) {
+            // sum += sizeof(matrix[i][j]);
             delete matrix[i][j];
             matrix[i][j] = nullptr;
         }
     }
+    // std::cout << "Freed " << sum << "B of memory at " << this << "\n";
 }
 
 NeuralMatrix *NeuralMatrix::operator*(const NeuralMatrix *other) const {

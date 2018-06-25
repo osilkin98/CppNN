@@ -31,6 +31,17 @@ int main(void) {
     two -> print();
 
     delete one;
+
+    one = new NeuralMatrix(*two);
+
+    one -> at(0, 0) = 13;
+
+    std::cout << "NeuralMatrix one (" << one << "): \n";
+    one -> print();
+    std::cout << "NeuralMatrix two (" << two << "): \n";
+    two -> print();
+
+    delete one;
     delete two;
     delete three;
 
