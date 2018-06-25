@@ -17,8 +17,8 @@ void NeuralLayer::clean() {
 NeuralLayer::NeuralLayer(const size_t layer_size, const size_t previous_layer_size) : N(layer_size) {
     data = new NeuralMatrix(layer_size, 1);
     if(previous_layer_size) { // if we have a specifed size for the previous layer
-        weights = new NeuralMatrix(layer_size, previous_layer_size);
-        bias = new NeuralMatrix(layer_size, 1);
+        weights = new NeuralMatrix(layer_size, previous_layer_size, false, true);
+        bias = new NeuralMatrix(layer_size, 1, false, true);
 
     } else { // otherwise this is the first (input) layer, so we don't create weights + bias
         bias = nullptr;
