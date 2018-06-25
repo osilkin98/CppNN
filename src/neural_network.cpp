@@ -129,6 +129,7 @@ void NeuralNetwork::print_all(void) const {
  *
  * */
 void NeuralNetwork::back_propogate(const std::vector<long double> &correct_data) const {
+    std::cout << "Inside back propogation\n";
     // check to see if the given data set matches the size of the output vector
     if(correct_data.size() != layers[layers.size() - 1] -> data -> N) {
         throw std::length_error("Length of given dataset doesn't match up with output layer");
@@ -143,6 +144,9 @@ void NeuralNetwork::back_propogate(const std::vector<long double> &correct_data)
     std::vector<NeuralMatrix*> error_vectors(layers.size(), nullptr);
     // should create a copy of the last layer (output)
     error_vectors[error_vectors.size() - 1] = new NeuralMatrix(*layers[layers.size() - 1] -> data);
+
+    std::cout << "About to enter first loop\n";
+
     // data.size = length of output layer
     for(register size_t i = 0; correct_data.size(); ++i) {
 
@@ -153,6 +157,7 @@ void NeuralNetwork::back_propogate(const std::vector<long double> &correct_data)
     NeuralMatrix *temp, *wt;
     long double del;
     register size_t i, j, k;
+    std::cout << "about to enter the main loop\n";
     // this loop performs the routine delta(l) = ((transpose(weight(l+1)) * delta(l+1)) * sigma'(z(l))
     for(i = error_vectors.size() - 2; i != 0; --i) {
         // here we have to get a copy of the transpose matrix
@@ -186,6 +191,7 @@ void NeuralNetwork::back_propogate(const std::vector<long double> &correct_data)
         error_vectors[i] = temp;
         delete wt;
     }
+    std::cout << "outside main loop\n";
     temp = nullptr;
     // to make sure this works correctly
     if(error_vectors[0] != nullptr) {
