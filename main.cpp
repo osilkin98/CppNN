@@ -34,6 +34,7 @@ int main(void) {
     three = *one * two;
     if(three != nullptr)
         three -> print();
+    // NeuralMatrix *four = three -> transpose();
 
     delete one;
     delete two;

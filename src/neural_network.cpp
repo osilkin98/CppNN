@@ -107,7 +107,7 @@ NeuralLayer* NeuralNetwork::operator[](const size_t index) {
 /* PRINT FUNCTION FOR DEBUGGING */
 void NeuralNetwork::print_all(void) const {
     for(size_t i = 0; i < layers.size(); ++i) {
-        std::cout << "--------------------------------: LAYER " << i << "  :----------------------------------------\n";
+        std::cout << "--------------------------------: LAYER " << i << " :----------------------------------------\n";
         layers[i] -> print();
     }
 }
@@ -115,5 +115,5 @@ void NeuralNetwork::print_all(void) const {
 
 /* Simple Back-propogation routine, an amortized lookup table in order to avoid recursive overhead */
 void NeuralNetwork::back_propogate(const std::vector<long double> &correct_data) const {
-
+    
 }
