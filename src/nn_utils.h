@@ -66,7 +66,15 @@ public:
 
     NeuralMatrix(const size_t n, const size_t m);
 
-    ~NeuralMatrix(void);
+    // @override
+    ~NeuralMatrix(void) override;
+
+    static NeuralMatrix* transpose(const NeuralMatrix* other);
+
+    NeuralMatrix* transpose(void) const;
+
+    void transpose_self(void);
+
 
     void print(void) const;
 

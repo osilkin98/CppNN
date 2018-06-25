@@ -97,6 +97,7 @@ void NeuralLayer::update(const NeuralLayer &other) const {
 }
 
 
+// print function
 void NeuralLayer::print() const {
     std::cout << "\nData Vector: " << data << "\n\n";
     data -> print();
@@ -108,3 +109,5 @@ void NeuralLayer::print() const {
     }
     std::cout << std::endl;
 }
+
+

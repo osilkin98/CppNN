@@ -29,9 +29,8 @@ int main(void) {
     three = *one - two;
     three -> print();
     delete three;
-    three = nullptr;
-    std::cout << one << " * " << two << std::endl;
-    three = *one * two;
+    three = NeuralMatrix::transpose(two);
+
     if(three != nullptr)
         three -> print();
     // NeuralMatrix *four = three -> transpose();

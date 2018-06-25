@@ -19,19 +19,19 @@ public:
     }
 
     // operator for matrix multiplication
-    Matrix<T>* operator*(Matrix<T>* other) const;
+    Matrix<T>* operator*(const Matrix<T>* other) const;
 
-    Matrix<T>* hadamard_product(Matrix<T>* other) const;
+    Matrix<T>* hadamard_product(const Matrix<T>* other) const;
 
-    Matrix<T>* operator+(Matrix<T>* other) const;
+    Matrix<T>* operator+(const Matrix<T>* other) const;
 
-    Matrix<T>* operator-(Matrix<T>* other) const;
+    Matrix<T>* operator-(const Matrix<T>* other) const;
 
     // for transposing other matrices
-    Matrix<T> *transpose(Matrix<T>* other) const;
+    static Matrix<T> *transpose(const Matrix<T>* other);
 
     // for transposing this matrix
-    Matrix<T> *transpose(void);
+    virtual Matrix<T> *transpose(void);
 
 
 
@@ -53,7 +53,7 @@ public:
 #pragma ide diagnostic ignored "OCDFAInspection"
 
 template <typename T>
-Matrix<T> *Matrix<T>::transpose(Matrix<T>* other) const {
+Matrix<T> *Matrix<T>::transpose(const Matrix<T>* other) {
     if(!(other -> valid())) {
         return nullptr;
     }
@@ -71,7 +71,7 @@ Matrix<T> *Matrix<T>::transpose(Matrix<T>* other) const {
 }
 
 template <typename T>
-Matrix<T>* Matrix<T>::transpose(void) {
+Matrix<T>* Matrix<T>::transpose(void){
     std::vector< std::vector<T> > temp_vector(M, std::vector<T>(N));
     register size_t i, j;
     for(i = 0; i < N; ++i) {
@@ -85,7 +85,7 @@ Matrix<T>* Matrix<T>::transpose(void) {
 }
 
 template <typename T>
-Matrix<T>* Matrix<T>::operator+(Matrix<T>* other) const {
+Matrix<T>* Matrix<T>::operator+(const Matrix<T>* other) const {
     if(this -> equal_size(*other)) {
         Matrix<T> *C = new Matrix<T>(N, M);
         register size_t i, j;
@@ -100,7 +100,7 @@ Matrix<T>* Matrix<T>::operator+(Matrix<T>* other) const {
 }
 
 template <typename T>
-Matrix<T>* Matrix<T>::operator-(Matrix<T>* other) const {
+Matrix<T>* Matrix<T>::operator-(const Matrix<T>* other) const {
     if(this -> equal_size(*other)) {
         Matrix<T> *C = new Matrix<T>(N, M);
         if(!C) {
@@ -119,7 +119,7 @@ Matrix<T>* Matrix<T>::operator-(Matrix<T>* other) const {
 }
 
 template <typename T>
-Matrix<T>* Matrix<T>::hadamard_product(Matrix<T>* other) const {
+Matrix<T>* Matrix<T>::hadamard_product(const Matrix<T>* other) const {
     if(N == other -> N && M == other -> M) {
         Matrix<T> *product = new Matrix(N, M);
         if(!product) {
@@ -139,7 +139,7 @@ Matrix<T>* Matrix<T>::hadamard_product(Matrix<T>* other) const {
 
 
 template <typename T>
-Matrix<T>* Matrix<T>::operator*(Matrix<T> *other) const {
+Matrix<T>* Matrix<T>::operator*(const Matrix<T> *other) const {
     if(M == other -> N) {
         Matrix<T> *C  = new Matrix(N, other -> M);
         if(!C) {

@@ -162,6 +162,18 @@ NeuralMatrix::NeuralMatrix(const NeuralMatrix& other) : Matrix<Neuron *>(other.N
     }
 }
 
+NeuralMatrix* NeuralMatrix::transpose(const NeuralMatrix* other) {
+    NeuralMatrix *new_mat = new NeuralMatrix(other -> M, other -> N);
+    register size_t i, j;
+    for(i = 0; i < other -> N; ++i) {
+        for(j = 0; j < other -> M; ++j) {
+            new_mat -> matrix[j][i] = other -> matrix[i][j];
+        }
+    }
+    return new_mat;
+}
+
+
 void NeuralMatrix::print(void) const { register size_t i, j;
     std::cout << "Printing NeuralMatrix object at " << this << ":\n";
     for(i = 0; i < N; ++i) {
