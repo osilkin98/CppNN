@@ -107,7 +107,10 @@ NeuralLayer* NeuralNetwork::operator[](const size_t index) {
 /* PRINT FUNCTION FOR DEBUGGING */
 void NeuralNetwork::print_all(void) const {
     for(size_t i = 0; i < layers.size(); ++i) {
-        std::cout << "--------------------------------: LAYER " << i << " :----------------------------------------\n";
+        std::cout << "--------------------------------: LAYER " << i
+                  << (!layers[i] -> weights ? " [INPUT LAYER]" : "" )
+                  << " :----------------------------------------\n";
+
         layers[i] -> print();
     }
 }
@@ -115,5 +118,9 @@ void NeuralNetwork::print_all(void) const {
 
 /* Simple Back-propogation routine, an amortized lookup table in order to avoid recursive overhead */
 void NeuralNetwork::back_propogate(const std::vector<long double> &correct_data) const {
+    // we need to amortize the error so we can quickly look it up later
+    // the size that will actually be in use is layers.size() - 1 in practice but it makes it easier to access
+    std::vector<NeuralMatrix*> error_vectors(layers.size(), nullptr);
+    NeuralMatrix *delta_cost = new NeuralMatrix(*layers[layers.size() - 1] -> data);
 
 }

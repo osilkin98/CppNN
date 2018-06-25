@@ -6,48 +6,14 @@
 // #include "linear_algebra.cpp"
 
 int main(void) {
-    NeuralMatrix *one = new NeuralMatrix(4, 1), *two = new NeuralMatrix(4, 1);
+
+
+
+    std::vector<long double> sizes = {3, 4, 2};
+    NeuralMatrix *one = new NeuralMatrix(sizes);
     one -> print();
-    two -> print();
-    for(int i = 0; i < 4; ++i) {
-        one -> at(i) = static_cast<long double>(i+1);
-        two -> at(i) = static_cast<long double>((i + 1) * 2);
-    }
-    one -> print();
-    two -> print();
-    /*std::cout << one << " (*) " << two << std::endl;*/
-    NeuralMatrix *three = two -> transpose();
-
-    if(three != nullptr) {
-        three->print();
-        three->at(0, 1) = 35;
-        three->print();
-    }
-    two -> print();
-    // NeuralMatrix *four = three -> transpose();
-
-    two -> transpose_self();
-
-    two -> print();
-
     delete one;
-
-    one = new NeuralMatrix(*two);
-
-    one -> at(0, 0) = 13;
-
-    std::cout << "NeuralMatrix one (" << one << "): \n";
-    one -> print();
-    std::cout << "NeuralMatrix two (" << two << "): \n";
-    two -> print();
-
-    delete one;
-    delete two;
-    delete three;
-
-    /*
-    std::vector<size_t> sizes = {3, 4, 2};
-    NeuralNetwork NN(sizes);
+    /*NeuralNetwork NN(sizes);
     std::vector<long double> data = {1, 2, 3};
     NN.set_data(data);
     NN.feed_forward();
@@ -57,7 +23,9 @@ int main(void) {
         std::cout << back_data[i] << " ";
     }
     std::cout << std::endl;
+    */
     return 0;
-     */
-    return 0;
+
+
+    //return 0;
 }

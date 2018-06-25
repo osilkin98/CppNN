@@ -78,6 +78,18 @@ NeuralMatrix::NeuralMatrix(const std::vector<long double> &vec) : Matrix<Neuron*
     }
 }
 
+
+NeuralMatrix::NeuralMatrix(const NeuralMatrix& other) : Matrix<Neuron *>(other.N, other.M) {
+    register size_t i, j;
+    for(i = 0; i < N; ++i) {
+        for(j = 0; j < M; ++j) {
+            // assumes that the copy constructor for the Neuron works correctly
+            matrix[i][j] = new Neuron(*other.matrix[i][j]);
+        }
+    }
+}
+
+
 NeuralMatrix::NeuralMatrix(const std::vector<std::vector<long double> > &matrix_other)
         : Matrix<Neuron *>(matrix_other.size(), matrix_other[0].size()) {
     register size_t i, j;
@@ -202,15 +214,6 @@ NeuralMatrix *NeuralMatrix::operator-(const NeuralMatrix *other) const {
     }
 }
 
-NeuralMatrix::NeuralMatrix(const NeuralMatrix& other) : Matrix<Neuron *>(other.N, other.M) {
-    register size_t i, j;
-    for(i = 0; i < N; ++i) {
-        for(j = 0; j < M; ++j) {
-            // assumes that the copy constructor for the Neuron works correctly
-            matrix[i][j] = new Neuron(*other.matrix[i][j]);
-        }
-    }
-}
 
 NeuralMatrix* NeuralMatrix::transpose(const NeuralMatrix* other) {
     NeuralMatrix *new_mat = new NeuralMatrix(other -> M, other -> N, true);
