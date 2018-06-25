@@ -10,13 +10,13 @@
 
 /***** ACTIVATION FUNCTIONS ********/
 
-long double sigmoid(const long double input);
+long double sigmoid(long double input);
 
-long double sigmoid_derivative(const long double input);
+long double sigmoid_derivative(long double input);
 
-long double ReLU(const long double input);
+long double ReLU(long double input);
 
-long double ReLU_derivative(const long double input);
+long double ReLU_derivative(long double input);
 
 
 // template <typename T>
@@ -25,30 +25,28 @@ struct Neuron {
     long double data, function, function_derivative;
 
     // returns the activation of the function
-    virtual const ld operator()(void);
+    virtual const ld operator()();
 
-    virtual const ld operator()(const ld input);
+    virtual const ld operator()(ld input);
 
-    virtual const ld set(const ld input);
+    virtual const ld set(ld input);
 
-    virtual const ld activation_function(const ld input) const;
+    virtual const ld activation_function(ld input) const;
 
-    virtual const ld activation_function_prime(const ld input) const;
+    virtual const ld activation_function_prime(ld input) const;
 
-    virtual void print(void) const;
+    virtual void print() const;
 
-    virtual Neuron* copy(void) const;
+    virtual Neuron* copy() const;
 
-    Neuron(void) : data(0), function(0.5), function_derivative(0.25) {}
+    Neuron() : data(0), function(0.5), function_derivative(0.25) {}
 
-    Neuron(const long double input) : data(input),
+    explicit Neuron(const long double input) : data(input),
                                       function(activation_function(input)),
                                       function_derivative(activation_function_prime(input))
     { }
 
-    Neuron(const Neuron& other) : data(other.data),
-                                  function(other.function),
-                                  function_derivative(other.function_derivative) { }
+    Neuron(const Neuron& other) = default;
 };
 
 
@@ -66,19 +64,19 @@ public:
 
     NeuralMatrix(const NeuralMatrix& other);
 
-    explicit NeuralMatrix(const size_t n, const size_t m = 1, bool nullified = false);
+    explicit NeuralMatrix(size_t n, size_t m = 1, bool nullified = false);
 
     // @override
-    ~NeuralMatrix(void) override;
+    ~NeuralMatrix() override;
 
     static NeuralMatrix* transpose(const NeuralMatrix* other);
 
-    NeuralMatrix* transpose(void) const;
+    NeuralMatrix* transpose() const;
 
-    void transpose_self(void);
+    void transpose_self();
 
 
-    void print(void) const;
+    void print() const override;
 
     long double& at(const size_t i, const size_t j = 0) {
         if(i < N && j < M) {
