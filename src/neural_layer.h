@@ -21,7 +21,7 @@ public:
 
 
 
-    NeuralLayer(size_t layer_size, size_t previous_layer_size);
+    explicit NeuralLayer(size_t layer_size, size_t previous_layer_size = 0);
 
     NeuralLayer(const NeuralLayer& other);
 

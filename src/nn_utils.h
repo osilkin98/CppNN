@@ -72,7 +72,7 @@ public:
     NeuralMatrix(const std::vector< std::vector<long double> >& matrix);
 
     // standard constructor
-    explicit NeuralMatrix(size_t n, size_t m = 1, bool nullified = false);
+    explicit NeuralMatrix(size_t n, size_t m = 1, bool nullified = false, bool random = false);
 
     // @override
     ~NeuralMatrix() override;
