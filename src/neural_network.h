@@ -12,6 +12,8 @@ class NeuralNetwork {
 private:
     std::vector< NeuralLayer *> layers;
 
+    long double learning_rate;
+
 public:
 
 
@@ -29,9 +31,10 @@ public:
     virtual void back_propogate(const std::vector<long double>& correct_data) const;
     /* labels for constructors are optional */
 
-    NeuralNetwork(const size_t *dimensions, size_t N, std::string new_label);
+    NeuralNetwork(const size_t *dimensions, size_t N, std::string new_label, long double rate = 0.015);
 
-    explicit NeuralNetwork(const std::vector<size_t>& dimensions, std::string new_label = std::string());
+    explicit NeuralNetwork(const std::vector<size_t>& dimensions,
+                           std::string new_label = std::string(), long double rate = 0.015);
 
     NeuralNetwork(const NeuralNetwork& other);
 
