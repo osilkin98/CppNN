@@ -22,10 +22,14 @@ const long double Neuron::operator()(const long double input)  {
     return function;
 }
 
+
+// for "firing" the neuron
 const long double Neuron::operator()(void) {
     return function;
 }
 
+
+// for setting the values of Neuron objects from just one input
 const long double Neuron::set(const Neuron::ld input) {
     data = input;
     function = activation_function(input);
@@ -33,14 +37,18 @@ const long double Neuron::set(const Neuron::ld input) {
     return function;
 }
 
+// activation function
 const long double Neuron::activation_function(const long double input) const {
     return exp(input) / (exp(input) + 1);
 }
 
+// activation function
 const long double Neuron::activation_function_prime(const long double input) const {
     return Neuron::activation_function(input) * (1 - Neuron::activation_function(input));
 }
 
+
+// print function
 void Neuron::print(void) const {
     /*
     std::cout << '\n' << this << ": {\n";
@@ -50,13 +58,22 @@ void Neuron::print(void) const {
     std::cout << data << " ";
 }
 
+
+Neuron* Neuron::copy(void) const {
+    Neuron* new_neuron = new Neuron(data);
+    return new_neuron;
+}
+
+
 /************ NEURAL NETWORK IMPLEMENTATION *******************/
 
-NeuralMatrix::NeuralMatrix(const size_t n, const size_t m = 1) : Matrix<Neuron *>(n, m) {
-    register size_t i, j;
-    for(i = 0; i < N; ++i) {
-        for(j = 0; j < M; ++j) {
-            this -> matrix[i][j] = new Neuron;
+NeuralMatrix::NeuralMatrix(const size_t n, const size_t m = 1, bool is_null = false) : Matrix<Neuron *>(n, m) {
+    if(!is_null) {
+        register size_t i, j;
+        for (i = 0; i < N; ++i) {
+            for (j = 0; j < M; ++j) {
+                this->matrix[i][j] = new Neuron;
+            }
         }
     }
 }
@@ -167,7 +184,7 @@ NeuralMatrix* NeuralMatrix::transpose(const NeuralMatrix* other) {
     register size_t i, j;
     for(i = 0; i < other -> N; ++i) {
         for(j = 0; j < other -> M; ++j) {
-            new_mat -> matrix[j][i] = other -> matrix[i][j];
+            new_mat -> matrix[j][i] = other -> matrix[i][j] -> copy();
         }
     }
     return new_mat;
@@ -185,6 +202,11 @@ void NeuralMatrix::print(void) const { register size_t i, j;
         std::cout << "]\n";
     }
     std::cout << std::endl;
+}
+
+NeuralMatrix* NeuralMatrix::transpose(void) const {
+    NeuralMatrix* copy = new NeuralMatrix(M, N);
+
 }
 
 #pragma clang diagnostic pop

@@ -15,24 +15,15 @@ int main(void) {
     }
     one -> print();
     two -> print();
-    std::cout << one << " (*) " << two << std::endl;
-    NeuralMatrix *three = one -> hadamard_product(two);
-    three -> print();
-    delete three;
-    three = nullptr;
-    std::cout << one << " + " << two << std::endl;
-    three = *one + two;
-    three -> print();
-    delete three;
-    three = nullptr;
-    std::cout << one << " - " << two << std::endl;
-    three = *one - two;
-    three -> print();
-    delete three;
-    three = NeuralMatrix::transpose(two);
+    /*std::cout << one << " (*) " << two << std::endl;*/
+    NeuralMatrix *three = NeuralMatrix::transpose(two);
 
-    if(three != nullptr)
-        three -> print();
+    if(three != nullptr) {
+        three->print();
+        three->at(0, 1) = 35;
+        three->print();
+    }
+    two -> print();
     // NeuralMatrix *four = three -> transpose();
 
     delete one;

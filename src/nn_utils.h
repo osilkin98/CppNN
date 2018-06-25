@@ -37,6 +37,8 @@ struct Neuron {
 
     virtual void print(void) const;
 
+    virtual Neuron* copy(void) const;
+
     Neuron(void) : data(0), function(0.5), function_derivative(0.25) {}
 
     Neuron(const long double input) : data(input),
@@ -64,7 +66,7 @@ public:
 
     NeuralMatrix(const NeuralMatrix& other);
 
-    NeuralMatrix(const size_t n, const size_t m);
+    NeuralMatrix(const size_t n, const size_t m = 1, bool nullified = false);
 
     // @override
     ~NeuralMatrix(void) override;
