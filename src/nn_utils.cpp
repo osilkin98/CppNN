@@ -8,6 +8,7 @@
 //
 #include <iostream>
 #include <cmath>
+#include <stdexcept>
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCDFAInspection"
@@ -65,7 +66,31 @@ Neuron* Neuron::copy(void) const {
 }
 
 
-/************ NEURAL NETWORK IMPLEMENTATION *******************/
+/************ NEURAL MATRIX IMPLEMENTATION *******************/
+
+
+/***** CONSTRUCTORS **********/
+
+NeuralMatrix::NeuralMatrix(const std::vector<long double> &vec) : N(vec.size()), M(1), matrix(vec.size(), std::vector<Neuron*>(1, nullptr)){
+    register size_t i;
+    for(i = 0; i < N; ++i) {
+        matrix[i][0] = new Neuron(vec[i]);
+    }
+}
+
+NeuralMatrix::NeuralMatrix(const std::vector<std::vector<long double> > &matrix_other)
+        : N(matrix_other.size()), M(matrix_other.size()), matrix(N, std::vector<Neuron *>(M, nullptr)) {
+    register size_t i, j;
+    for(i = 0; i < N; ++i) {
+        if(matrix_other[i].size() != M) {
+            throw std::invalid_argument("Matrix passed is not rectangular");
+        }
+        for(j = 0; j < M; ++j) {
+            matrix[i][j] = new Neuron(matrix_other[i][j]);
+        }
+    }
+
+}
 
 NeuralMatrix::NeuralMatrix(const size_t n, const size_t m, bool is_null) : Matrix<Neuron *>(n, m) {
     if(!is_null) {

@@ -62,8 +62,16 @@ public:
 
     NeuralMatrix *operator-(const NeuralMatrix *other) const;
 
+    // copy constructor
     NeuralMatrix(const NeuralMatrix& other);
 
+    /* constructors for 1-dimensional & 2-dimensional STL vectors*/
+    NeuralMatrix(const std::vector< long double>& vec);
+
+    // 2-dimensiona std::vector
+    NeuralMatrix(const std::vector< std::vector<long double> >& matrix);
+
+    // standard constructor
     explicit NeuralMatrix(size_t n, size_t m = 1, bool nullified = false);
 
     // @override

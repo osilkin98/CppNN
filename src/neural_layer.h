@@ -20,6 +20,7 @@ public:
     NeuralLayer& operator=(const NeuralLayer& other);
 
 
+
     NeuralLayer(size_t layer_size, size_t previous_layer_size);
 
     NeuralLayer(const NeuralLayer& other);

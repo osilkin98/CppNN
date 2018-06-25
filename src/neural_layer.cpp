@@ -25,6 +25,9 @@ NeuralLayer::NeuralLayer(const size_t layer_size, const size_t previous_layer_si
     }
 }
 
+
+
+// copy constructor
 NeuralLayer::NeuralLayer(const NeuralLayer &other) : N(other.N) {
     // N should be the same for each matrix
     data = new NeuralMatrix(other.data -> N, 1);
