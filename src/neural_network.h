@@ -21,10 +21,10 @@ public:
     /* In the future the set_data routine should be templated to accept *ANY* type of container */
     virtual void set_data(const std::vector<long double>& data) const;
 
-    virtual void set_data(const long double *data, const size_t N) const;
+    virtual void set_data(const long double *data, size_t N) const;
 
     // forward-propogation routine, this is written to be very abstracted
-    virtual void feed_forward(void) const;
+    virtual void feed_forward() const;
 
     virtual void back_propogate(const std::vector<long double>& correct_data) const;
     /* labels for constructors are optional */
@@ -38,16 +38,16 @@ public:
     virtual ~NeuralNetwork();
 
     // to get a copy of the final data
-    virtual std::vector<long double> get_data_vector(void) const;
+    virtual std::vector<long double> get_data_vector() const;
 
     // to be able to index a certain layer of the network
-    virtual const NeuralLayer* operator[](const size_t index) const;
+    virtual const NeuralLayer* operator[](size_t index) const;
 
-    virtual NeuralLayer *operator[](const size_t index);
+    virtual NeuralLayer *operator[](size_t index);
 
 
 
-    void print_all(void) const;
+    void print_all() const;
 
 };
 
