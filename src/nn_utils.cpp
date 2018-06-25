@@ -220,4 +220,18 @@ NeuralMatrix* NeuralMatrix::transpose(void) const {
 
 }
 
+void NeuralMatrix::transpose_self() {
+    std::vector< std::vector< Neuron *> > new_matrix(M, std::vector< Neuron *>(N, nullptr));
+    register size_t i, j;
+    for(i = 0; i < N; ++i) {
+        for(j = 0; j < M; ++j) {
+            new_matrix[j][i] = matrix[i][j];
+        }
+    }
+    matrix = new_matrix;
+
+    N = matrix.size();
+    M = matrix[0].size();
+}
+
 #pragma clang diagnostic pop

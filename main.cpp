@@ -26,6 +26,10 @@ int main(void) {
     two -> print();
     // NeuralMatrix *four = three -> transpose();
 
+    two -> transpose_self();
+
+    two -> print();
+
     delete one;
     delete two;
     delete three;
