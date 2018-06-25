@@ -5,7 +5,7 @@
 #include "neural_layer.h"
 
 
-void NeuralLayer::clean(void) {
+void NeuralLayer::clean() {
     delete data;
     data = nullptr;
     delete bias;
@@ -48,7 +48,7 @@ NeuralLayer::NeuralLayer(const NeuralLayer &other) : N(other.N) {
 }
 
 // basic destructor just deletes the NeuralMatrix Objects
-NeuralLayer::~NeuralLayer(void) {
+NeuralLayer::~NeuralLayer() {
     delete weights;
     delete bias;
     delete data;

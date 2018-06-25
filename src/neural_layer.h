@@ -20,13 +20,13 @@ public:
     NeuralLayer& operator=(const NeuralLayer& other);
 
 
-    NeuralLayer(const size_t layer_size, const size_t previous_layer_size);
+    NeuralLayer(size_t layer_size, size_t previous_layer_size);
 
     NeuralLayer(const NeuralLayer& other);
 
     ~NeuralLayer();
 
-    void print(void) const;
+    void print() const;
 
     virtual void update(const NeuralLayer& other) const;
 
