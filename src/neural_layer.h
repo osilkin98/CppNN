@@ -27,7 +27,6 @@ public:
     ~NeuralLayer();
 
     void print() const;
-
     virtual void update(const NeuralLayer& other) const;
 
     friend class NeuralNetwork;

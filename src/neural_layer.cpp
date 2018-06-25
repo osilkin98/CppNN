@@ -66,8 +66,6 @@ NeuralLayer& NeuralLayer::operator=(const NeuralLayer& other) {
     temp = data;
     data = other.data;
     delete temp;
-    temp = nullptr;
-
 }
 
 // this just performs the forward pass operation for one Layer from the other
