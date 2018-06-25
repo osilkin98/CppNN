@@ -66,7 +66,7 @@ public:
 
     NeuralMatrix(const NeuralMatrix& other);
 
-    NeuralMatrix(const size_t n, const size_t m = 1, bool nullified = false);
+    explicit NeuralMatrix(const size_t n, const size_t m = 1, bool nullified = false);
 
     // @override
     ~NeuralMatrix(void) override;

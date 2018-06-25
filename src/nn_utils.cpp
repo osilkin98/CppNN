@@ -67,7 +67,7 @@ Neuron* Neuron::copy(void) const {
 
 /************ NEURAL NETWORK IMPLEMENTATION *******************/
 
-NeuralMatrix::NeuralMatrix(const size_t n, const size_t m = 1, bool is_null = false) : Matrix<Neuron *>(n, m) {
+NeuralMatrix::NeuralMatrix(const size_t n, const size_t m, bool is_null) : Matrix<Neuron *>(n, m) {
     if(!is_null) {
         register size_t i, j;
         for (i = 0; i < N; ++i) {
@@ -180,7 +180,7 @@ NeuralMatrix::NeuralMatrix(const NeuralMatrix& other) : Matrix<Neuron *>(other.N
 }
 
 NeuralMatrix* NeuralMatrix::transpose(const NeuralMatrix* other) {
-    NeuralMatrix *new_mat = new NeuralMatrix(other -> M, other -> N);
+    NeuralMatrix *new_mat = new NeuralMatrix(other -> M, other -> N, true);
     register size_t i, j;
     for(i = 0; i < other -> N; ++i) {
         for(j = 0; j < other -> M; ++j) {
