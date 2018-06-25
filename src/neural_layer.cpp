@@ -47,13 +47,16 @@ NeuralLayer::NeuralLayer(const NeuralLayer &other) : N(other.N) {
     }
 }
 
+// basic destructor just deletes the NeuralMatrix Objects
 NeuralLayer::~NeuralLayer(void) {
     delete weights;
     delete bias;
     delete data;
 }
 
+// This is to set the other object to the calling object
 NeuralLayer& NeuralLayer::operator=(const NeuralLayer& other) {
+    // this code could probably be cleaned up but it's too much extra overhead to deal with for something that isn't changing
     NeuralMatrix *temp = weights;
     weights = other.weights;
     delete temp;
@@ -67,6 +70,7 @@ NeuralLayer& NeuralLayer::operator=(const NeuralLayer& other) {
 
 }
 
+// this just performs the forward pass operation for one Layer from the other
 void NeuralLayer::update(const NeuralLayer &other) const {
     if(weights -> M != other.data -> N) {
         std::cerr << "During update operation, bias M [" << bias -> N << "] at " << bias

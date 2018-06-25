@@ -5,7 +5,7 @@
 #include "neural_network.h"
 
 /************ CONSTRUCTORS AND DESTRUCTORS *******************************/
-NeuralNetwork::NeuralNetwork(const size_t *dimensions, const size_t N, std::string new_label = std::string())
+NeuralNetwork::NeuralNetwork(const size_t *dimensions, const size_t N, std::string new_label)
         : layers(N, nullptr), label(new_label) {
     layers[0] = new NeuralLayer(dimensions[0], 0);
     for(register size_t i = 1; i < N; ++i) {
@@ -13,7 +13,7 @@ NeuralNetwork::NeuralNetwork(const size_t *dimensions, const size_t N, std::stri
     }
 }
 
-NeuralNetwork::NeuralNetwork(const std::vector<size_t>& dimensions, std::string new_label = std::string()) :
+NeuralNetwork::NeuralNetwork(const std::vector<size_t>& dimensions, std::string new_label) :
         layers(dimensions.size(), nullptr), label(new_label) {
     layers[0] = new NeuralLayer(dimensions[0], 0);
     for(register size_t i = 1; i < dimensions.size(); ++i) {
@@ -115,5 +115,5 @@ void NeuralNetwork::print_all(void) const {
 
 /* Simple Back-propogation routine, an amortized lookup table in order to avoid recursive overhead */
 void NeuralNetwork::back_propogate(const std::vector<long double> &correct_data) const {
-    
+
 }

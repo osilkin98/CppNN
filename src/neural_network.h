@@ -31,7 +31,7 @@ public:
 
     NeuralNetwork(const size_t *dimensions, size_t N, std::string new_label);
 
-    explicit NeuralNetwork(const std::vector<size_t>& dimensions, std::string new_label);
+    explicit NeuralNetwork(const std::vector<size_t>& dimensions, std::string new_label = std::string());
 
     NeuralNetwork(const NeuralNetwork& other);
 
