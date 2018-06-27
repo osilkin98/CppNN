@@ -1,4 +1,5 @@
 # Neural-Networks
+[Version][0.1] [MIT][LICENSE.md] 
 ## Extensible Neural Network library written entirely in C++ 
 
 ### Project Goals:
