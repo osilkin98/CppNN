@@ -1,5 +1,5 @@
 # Neural-Networks
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 ## Extensible Neural Network library written entirely in C++ 
 
 ### Project Goals:
