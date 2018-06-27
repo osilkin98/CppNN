@@ -6,6 +6,17 @@ This project aims to create a library for deep learning and machine
 learning with the extensibility of Google's TensorFlow, but with the 
 speed and efficiency of C++. 
 
+### Todo:
+- [x] Implement Back-Propagation
+- [ ] Optimize Code
+- [ ] Move Weight & Bias from NeuralMatrix to simpler struct/class
+- [ ] Parallelize Routines in order to drastically decrease runtime
+- [ ] Add Functionality for Generic Evalutionary Algorithms
+- [ ] Learning Model Selection
+- [ ] Add Support for Convolutionary Neural Networks
+- [ ] Add Support for Recurrent Neural Networks
+
+
 ### Where is this library right now?
 This library provides basic Neural Network functionalities, such as
 the ability to feed data into the network, receive an output, feed in
