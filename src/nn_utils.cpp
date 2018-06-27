@@ -155,7 +155,7 @@ NeuralMatrix *NeuralMatrix::operator*(const NeuralMatrix *other) const {
         register size_t k;
         for(i = 0; i < new_layer -> N; ++i) {
             for(j = 0; j < new_layer -> M; ++j) {
-                for(k = 0; k < Matrix<Neuron *>::N; ++k) {
+                for(k = 0; k < M; ++k) {
                     (new_layer -> matrix[i][j]) -> data +=
                             (this -> matrix[i][k]) -> data * (other -> matrix[k][j]) -> data;
                 }
