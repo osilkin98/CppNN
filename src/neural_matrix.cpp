@@ -2,7 +2,7 @@
 // Created by Oleg on 6/14/2018.
 //
 
-#include "nn_utils.h"
+#include "neural_matrix.h"
 //
 // Created by oleg on 6/4/18.
 //

@@ -5,7 +5,7 @@
 #ifndef NEURALNETWORKS_NEURALLAYER_H
 #define NEURALNETWORKS_NEURALLAYER_H
 
-#include "nn_utils.h"
+#include "neural_matrix.h"
 
 class NeuralLayer {
 private:
