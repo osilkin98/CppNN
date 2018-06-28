@@ -2,7 +2,7 @@
 // Created by Oleg on 6/27/2018.
 //
 
-#include "linear_algebra.h"
+#include "matrix.h"
 
 
 // this operator will be used when creating error vectors through back-propogation
@@ -50,5 +50,7 @@ Matrix<long double>* Matrix<long double>::operator-(const NeuralMatrix *other) c
 
 template <>
 Matrix<long double> *Matrix<long double>::hadamard_product(const NeuralMatrix *other) const {
-
+    if(equal_size(*other)) {
+        Matrix<long double> *product = new Matrix<long double>(N, M);
+    }
 }

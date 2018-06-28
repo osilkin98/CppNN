@@ -1,5 +1,5 @@
 #include <iostream>
-#include "src/linear_algebra.h"
+#include "src/matrix.h"
 #include "src/neural_network.h"
 // #include "linear_algebra.cpp"
 
