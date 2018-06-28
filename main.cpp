@@ -8,7 +8,6 @@
 int main(void) {
 
 
-
     std::vector<size_t> sizes = {3, 4, 2};
 
     NeuralNetwork NN(sizes);
