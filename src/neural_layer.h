@@ -13,6 +13,7 @@ private:
 
     NeuralMatrix *data, *bias, *weights;
 
+
 public:
     const size_t N;
 

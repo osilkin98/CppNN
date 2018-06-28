@@ -76,8 +76,8 @@ NeuralLayer& NeuralLayer::operator=(const NeuralLayer& other) {
 void NeuralLayer::update(const NeuralLayer &other) const {
     if(weights -> M != other.data -> N) {
         std::cerr << "During update operation, bias M [" << bias -> N << "] at " << bias
-        << " in object " << this << " does not match input vector size N [" << other.data -> N
-        << "] at " << other.data << '\n';
+                  << " in object " << this << " does not match input vector size N [" << other.data -> N
+                  << "] at " << other.data << '\n';
     }
     register size_t i;
     long double sum;
@@ -86,7 +86,7 @@ void NeuralLayer::update(const NeuralLayer &other) const {
             sum = 0 + bias -> matrix[elem][0] -> data;
             for(i = 0; i < bias -> M; ++i) {
                 sum += weights -> matrix[elem][i] -> data *
-                                         other.data -> matrix[i][0] -> function;
+                       other.data -> matrix[i][0] -> function;
             }
             data -> matrix[elem][0] -> set(sum);
         }

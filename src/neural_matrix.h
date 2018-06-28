@@ -2,10 +2,11 @@
 // Created by oleg on 6/4/18.
 //
 
-#include "linear_algebra.h"
-
 #ifndef NEURALNETWORK_UTILS_H
 #define NEURALNETWORK_UTILS_H
+
+#include "matrix.h"
+
 
 
 /***** ACTIVATION FUNCTIONS ********/
@@ -42,8 +43,8 @@ struct Neuron {
     Neuron() : data(0), function(0.5), function_derivative(0.25) {}
 
     explicit Neuron(const long double input) : data(input),
-                                      function(activation_function(input)),
-                                      function_derivative(activation_function_prime(input))
+                                               function(activation_function(input)),
+                                               function_derivative(activation_function_prime(input))
     { }
 
     Neuron(const Neuron& other) = default;
@@ -61,6 +62,8 @@ public:
     NeuralMatrix *operator+(const NeuralMatrix *other) const;
 
     NeuralMatrix *operator-(const NeuralMatrix *other) const;
+
+
 
     // copy constructor
     NeuralMatrix(const NeuralMatrix& other);

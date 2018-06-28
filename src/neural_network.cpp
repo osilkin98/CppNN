@@ -172,7 +172,7 @@ void NeuralNetwork::back_propogate(const std::vector<long double> &correct_data)
              * the weights matrix in order to back-propogate correctly
              */
             del = learning_rate * (temp -> matrix[j][0] -> data *=
-                                                  layers[i] -> data -> matrix[j][0] -> function_derivative);
+                                           layers[i] -> data -> matrix[j][0] -> function_derivative);
             // subtract the delta from the bias
             layers[i] -> bias -> matrix[j][0] -> data -= del;
             // for the weight matrix, it's dC/d(w^(l)_{j,k}) = a^(l-1)_k * del(l)_j, so we have to multiply through
