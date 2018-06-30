@@ -14,13 +14,13 @@
 
  namespace matrix_operators {
 
-     Matrix<long double> *matrix_subtraction(Matrix<long double> *first, const NeuralMatrix *second);
+     Matrix<long double> *subtract(Matrix<long double> *first, const NeuralMatrix *second);
 
      Matrix<long double> *hadamard_product(Matrix<long double> *first, const NeuralMatrix *other);
 
-     Matrix<long double> *matrix_multiplication(const Matrix<long double> *first, const NeuralMatrix *other);
+     Matrix<long double> *multiply(const Matrix<long double> *first, const NeuralMatrix *other);
 
-     Matrix<long double> *matrix_add(const Matrix<long double> *first, const NeuralMatrix *other);
+     Matrix<long double> *add(const Matrix<long double> *first, const NeuralMatrix *other);
 
  };
 
