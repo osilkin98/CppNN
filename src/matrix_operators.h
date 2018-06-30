@@ -15,6 +15,7 @@
 
 namespace matrix_operators {
 
+    // this is for the user to specify what mode they want to copy the NeuralMatrix object with
     enum Mode { data = 0, function = 1, derivative = 2};
 
     Matrix<long double> *subtract(const Matrix<long double> *first, const NeuralMatrix *second);
