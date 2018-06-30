@@ -3,11 +3,14 @@
 //
 
 #include "matrix.h"
+#include "neural_matrix.h"
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCDFAInspection"
 
 // this operator will be used when creating error vectors through back-propogation
-Matrix<long double>::Matrix(const NeuralMatrix& other, bool using_data) :
+/*
+template <typename T, class O>
+Matrix<T>::Matrix(const O& other, bool using_data) :
         N(other.N), M(other.M), matrix(other.N, std::vector<long double>(other.M)) {
     register size_t i, j;
     if(using_data) {
@@ -23,7 +26,7 @@ Matrix<long double>::Matrix(const NeuralMatrix& other, bool using_data) :
             }
         }
     }
-}
+}*/
 
 /*
  * for operators between the elementary long double matrices and the neural matrices,
@@ -32,19 +35,17 @@ Matrix<long double>::Matrix(const NeuralMatrix& other, bool using_data) :
  */
 
 
-template <>
-Matrix<long double>* Matrix<long double>::operator-(const NeuralMatrix *other) const {
-    if(equal_size(*other)) {
-        Matrix<long double> *difference = new Matrix<long double>(N, M);
+Matrix<long double>* matrix_subtraction(Matrix<long double>* first, const NeuralMatrix *second) const {
+    if(first -> equal_size(*second)) {
+        Matrix<long double> *difference = new Matrix<long double>(first -> N, second -> M);
         if(difference == nullptr) {
-            std::cerr << "Allocation failed at " << this << "\n";
             return nullptr;
         }
         register size_t i, j;
-        for(i = 0; i < N; ++i) {
-            for(j = 0; j < M; ++j) {
+        for(i = 0; i < first -> N; ++i) {
+            for(j = 0; j < first -> M; ++j) {
                 // for operators between trivial matrices and neural matrices, the
-                difference -> matrix[i][j] = matrix[i][j] - other -> matrix[i][j] -> data;
+                difference -> matrix[i][j] = first -> matrix[i][j] - second -> matrix[i][j] -> data;
             }
         }
         return difference;
@@ -53,19 +54,17 @@ Matrix<long double>* Matrix<long double>::operator-(const NeuralMatrix *other) c
     }
 }
 
-template <>
-Matrix<long double> *Matrix<long double>::hadamard_product(const NeuralMatrix *other) const {
-    if(equal_size(*other)) {
-        Matrix<long double> *product = new Matrix<long double>(N, M);
+Matrix<long double>* hadamard_product(Matrix<long double>* first, const NeuralMatrix *other) const {
+    if(first -> equal_size(*other)) {
+        Matrix<long double> *product = new Matrix<long double>(first -> N, first -> M);
         if(product == nullptr) {
-            std::cerr << "Allocation failed at " << this << "\n";
             return nullptr;
         }
         register size_t i, j;
-        for(i = 0; i < N; ++i) {
-            for(j = 0; j < M; ++j) {
+        for(i = 0; i < first -> N; ++i) {
+            for(j = 0; j < first -> M; ++j) {
                 // for operators between trivial matrices and neural matrices, the
-                product -> matrix[i][j] = matrix[i][j] - other -> matrix[i][j] -> data;
+                product -> matrix[i][j] = first -> matrix[i][j] - other -> matrix[i][j] -> data;
             }
         }
         return product;
@@ -79,19 +78,18 @@ Matrix<long double> *Matrix<long double>::hadamard_product(const NeuralMatrix *o
 // using something like iterators for data members and then just iterating through and returning a vector of
 // doubles which is the resuult of whatever multiplicatios
 template <>
-Matrix<long double>* Matrix<long double>::operator*(const NeuralMatrix* other) const {
-    if(M == other -> N) {
-        Matrix<long double> *product = new Matrix<long double>(N, other -> M);
+Matrix<long double>* matrix_multiplication(const Matrix<long double>* first, const NeuralMatrix* other) const {
+    if(first -> M == other -> N) {
+        Matrix<long double> *product = new Matrix<long double>(first -> N, other -> M);
         if(product == nullptr) {
-            std::cerr << "Allocation failed at " << this << "\n";
             return nullptr;
         }
         register size_t i, j, k;
-        for(i = 0; i < N; ++i) {
+        for(i = 0; i < first -> N; ++i) {
             for(j = 0; j < other -> M; ++j) {
                 product -> matrix[i][j] = 0;
-                for(k = 0; k < M; ++k) {
-                    product -> matrix[i][j] += matrix[i][k] * other -> matrix[k][j] -> function;
+                for(k = 0; k < first -> M; ++k) {
+                    product -> matrix[i][j] += first -> matrix[i][k] * other -> matrix[k][j] -> function;
                 }
             }
         }
@@ -103,18 +101,17 @@ Matrix<long double>* Matrix<long double>::operator*(const NeuralMatrix* other) c
 
 
 template <>
-Matrix<long double>* Matrix<long double>::operator+(const NeuralMatrix* other) const {
-    if(equal_size(*other)) {
-        Matrix<long double> *difference = new Matrix<long double>(N, M);
+Matrix<long double>* matrix_add(const Matrix<long double>* first, const NeuralMatrix* other) const {
+    if(first -> equal_size(*other)) {
+        Matrix<long double> *difference = new Matrix<long double>(first -> N, first -> M);
         if(difference == nullptr) {
-            std::cerr << "Allocation failed at " << this << "\n";
             return nullptr;
         }
         register size_t i, j;
-        for(i = 0; i < N; ++i) {
-            for(j = 0; j < M; ++j) {
+        for(i = 0; i < first -> N; ++i) {
+            for(j = 0; j < first -> M; ++j) {
                 // for operators between trivial matrices and neural matrices, the
-                difference -> matrix[i][j] = matrix[i][j] - other -> matrix[i][j] -> data;
+                difference -> matrix[i][j] = first -> matrix[i][j] - other -> matrix[i][j] -> data;
             }
         }
         return difference;

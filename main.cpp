@@ -8,6 +8,12 @@
 int main(void) {
 
 
+
+
+
+
+    /*
+
     std::vector<size_t> sizes = {3, 4, 2};
 
     NeuralNetwork NN(sizes);
@@ -25,7 +31,7 @@ int main(void) {
     NN.back_propogate(correct_data);
     NN.print_all();
     std::cout << std::endl;
-
+*/
     return 0;
 
 

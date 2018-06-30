@@ -27,19 +27,19 @@ public:
     // operator for matrix multiplication
     Matrix<T>* operator*(const Matrix<T>* other) const;
 
-    Matrix<long double>* operator*(const NeuralMatrix* other) const;
+    /// Matrix<long double>* operator*(const NeuralMatrix* other) const;
 
     Matrix<T>* hadamard_product(const Matrix<T>* other) const;
 
-    Matrix<long double>* hadamard_product(const NeuralMatrix* other) const;
+    // Matrix<long double>* hadamard_product(const NeuralMatrix* other) const;
 
     Matrix<T>* operator+(const Matrix<T>* other) const;
 
-    Matrix<long double>* operator+(const NeuralMatrix* other) const;
+    // Matrix<long double>* operator+(const NeuralMatrix* other) const;
 
     Matrix<T>* operator-(const Matrix<T>* other) const;
 
-    Matrix<long double>* operator-(const NeuralMatrix* other) const;
+   // Matrix<long double>* operator-(const NeuralMatrix* other) const;
 
     // for transposing other matrices
     static Matrix<T> *transpose(const Matrix<T>* other);
@@ -57,9 +57,9 @@ public:
     Matrix(const Matrix<T>& other) : matrix(other.matrix), N(other.N), M(other.M) { }
 
     // the using_data field controls whether we use the data field or function field to create new matrix
-    explicit Matrix<long double>(const NeuralMatrix& other, bool using_data = true);
+    // explicit Matrix<long double>(const NeuralMatrix& other, bool using_data = true);
 
-    Matrix<long double>(const NeuralMatrix& other, const std::vector<long double>& correct_data);
+    // Matrix<long double>(const NeuralMatrix& other, const std::vector<long double>& correct_data);
 
     void zero_matrix(void);
 
