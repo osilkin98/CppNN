@@ -1,41 +1,21 @@
 //
+// Created by Oleg on 6/29/2018.
+//
+
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCDFAInspection"
+
+//
 // Created by Oleg on 6/27/2018.
 //
 
 #include "matrix.h"
 #include "neural_matrix.h"
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "OCDFAInspection"
 
-// this operator will be used when creating error vectors through back-propogation
-/*
-template <typename T, class O>
-Matrix<T>::Matrix(const O& other, bool using_data) :
-        N(other.N), M(other.M), matrix(other.N, std::vector<long double>(other.M)) {
-    register size_t i, j;
-    if(using_data) {
-        for(i = 0; i < N; ++i) {
-            for(j = 0; j < M; ++j) {
-                matrix[i][j] = other.matrix[i][j] -> data;
-            }
-        }
-    } else {
-        for(i = 0; i < N; ++i) {
-            for(j = 0; j < M; ++j) {
-                matrix[i][j] = other.matrix[i][j] -> function;
-            }
-        }
-    }
-}*/
-
-/*
- * for operators between the elementary long double matrices and the neural matrices,
- * the field accessed from the neural matrix will always be the 'data' field, with the
- * exception of the multiplication operator
- */
+#include "matrix_operators.h"
 
 
-Matrix<long double>* matrix_subtraction(Matrix<long double>* first, const NeuralMatrix *second) const {
+Matrix<long double>* matrix_subtraction(Matrix<long double>* first, const NeuralMatrix *second) {
     if(first -> equal_size(*second)) {
         Matrix<long double> *difference = new Matrix<long double>(first -> N, second -> M);
         if(difference == nullptr) {
@@ -54,7 +34,7 @@ Matrix<long double>* matrix_subtraction(Matrix<long double>* first, const Neural
     }
 }
 
-Matrix<long double>* hadamard_product(Matrix<long double>* first, const NeuralMatrix *other) const {
+Matrix<long double>* hadamard_product(Matrix<long double>* first, const NeuralMatrix *other)  {
     if(first -> equal_size(*other)) {
         Matrix<long double> *product = new Matrix<long double>(first -> N, first -> M);
         if(product == nullptr) {
@@ -77,8 +57,7 @@ Matrix<long double>* hadamard_product(Matrix<long double>* first, const NeuralMa
 // there's likely a better way to do these multiplications than to write specific cases for the matrices
 // using something like iterators for data members and then just iterating through and returning a vector of
 // doubles which is the resuult of whatever multiplicatios
-template <>
-Matrix<long double>* matrix_multiplication(const Matrix<long double>* first, const NeuralMatrix* other) const {
+Matrix<long double>* matrix_multiplication(const Matrix<long double>* first, const NeuralMatrix* other)  {
     if(first -> M == other -> N) {
         Matrix<long double> *product = new Matrix<long double>(first -> N, other -> M);
         if(product == nullptr) {
@@ -100,8 +79,7 @@ Matrix<long double>* matrix_multiplication(const Matrix<long double>* first, con
 }
 
 
-template <>
-Matrix<long double>* matrix_add(const Matrix<long double>* first, const NeuralMatrix* other) const {
+Matrix<long double>* matrix_add(const Matrix<long double>* first, const NeuralMatrix* other) {
     if(first -> equal_size(*other)) {
         Matrix<long double> *difference = new Matrix<long double>(first -> N, first -> M);
         if(difference == nullptr) {
