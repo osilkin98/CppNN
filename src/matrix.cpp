@@ -52,5 +52,15 @@ template <>
 Matrix<long double> *Matrix<long double>::hadamard_product(const NeuralMatrix *other) const {
     if(equal_size(*other)) {
         Matrix<long double> *product = new Matrix<long double>(N, M);
+        register size_t i, j;
+        for(i = 0; i < N; ++i) {
+            for(j = 0; j < M; ++j) {
+                // for operators between trivial matrices and neural matrices, the
+                product -> matrix[i][j] = matrix[i][j] - other -> matrix[i][j] -> data;
+            }
+        }
+        return product;
+    } else {
+        throw std::length_error("Dimensions mismatch");
     }
 }
