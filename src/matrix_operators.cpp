@@ -11,7 +11,6 @@
 
 #include "matrix.h"
 #include "neural_matrix.h"
-
 #include "matrix_operators.h"
 
 
@@ -178,6 +177,43 @@ Matrix<long double>* matrix_operators::add(const NeuralMatrix* first, const Matr
         throw std::length_error("Dimension mismatch");
     }
 }
+
+Matrix<long double>* matrix_operators::create(const NeuralMatrix *other, const matrix_operators::Mode mod) {
+    Matrix<long double> *new_matrix = new Matrix<long double>(other -> N, other -> M);
+    if (new_matrix == nullptr) {
+        std::cerr << "Error: Failed to copy NeuralMatrix object at [" << other << "]; not enough space\n";
+        return nullptr;
+    }
+    register size_t i, j;
+    switch(mod) {
+        case matrix_operators::data: { // data
+            for (i = 0; i < other->N; ++i) {
+                for (j = 0; j < other->M; ++j) {
+                    new_matrix -> matrix[i][j] = other -> matrix[i][j] -> data;
+                }
+            }
+            return new_matrix;
+        };
+        case matrix_operators::function: {
+            for (i = 0; i < other->N; ++i) {
+                for (j = 0; j < other->M; ++j) {
+                    new_matrix -> matrix[i][j] = other -> matrix[i][j] -> function;
+                }
+            }
+            return new_matrix;
+        };
+        case matrix_operators::derivative: {
+            for (i = 0; i < other->N; ++i) {
+                for (j = 0; j < other->M; ++j) {
+                    new_matrix -> matrix[i][j] = other -> matrix[i][j] -> function_derivative;
+                }
+            }
+            return new_matrix;
+        };
+
+    }
+}
+
 
 
 #pragma clang diagnostic pop
