@@ -12,16 +12,18 @@
  * operations in an intuitive manner
  * */
 
- namespace matrix_operators {
+namespace matrix_operators {
+    Matrix<long double> *subtract(Matrix<long double> *first, const NeuralMatrix *second);
 
-     Matrix<long double> *subtract(Matrix<long double> *first, const NeuralMatrix *second);
+    Matrix<long double> *hadamard_product(Matrix<long double> *first, const NeuralMatrix *other);
 
-     Matrix<long double> *hadamard_product(Matrix<long double> *first, const NeuralMatrix *other);
+    Matrix<long double> *multiply(const Matrix<long double> *first, const NeuralMatrix *other);
 
-     Matrix<long double> *multiply(const Matrix<long double> *first, const NeuralMatrix *other);
+    Matrix<long double> *multiply(const NeuralMatrix *first, const Matrix<long double> *other);
 
-     Matrix<long double> *add(const Matrix<long double> *first, const NeuralMatrix *other);
+    Matrix<long double> *add(const Matrix<long double> *first, const NeuralMatrix *other);
 
- };
+
+};
 
 #endif //NEURALNETWORKS_MATRIX_OPERATORS_H
