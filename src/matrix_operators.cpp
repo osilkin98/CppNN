@@ -210,7 +210,6 @@ Matrix<long double>* matrix_operators::create(const NeuralMatrix *other, const m
             }
             return new_matrix;
         };
-
     }
 }
 
