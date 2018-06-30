@@ -34,6 +34,26 @@ Matrix<long double>* matrix_operators::subtract(const Matrix<long double>* first
     }
 }
 
+Matrix<long double>* matrix_operators::subtract(const NeuralMatrix *first, const Matrix<long double>* second) {
+    if(first -> N == second -> N && first -> M == second -> M) {
+        Matrix<long double> *difference = new Matrix<long double>(first -> N, second -> M);
+        if(difference == nullptr) {
+            return nullptr;
+        }
+        register size_t i, j;
+        for(i = 0; i < first -> N; ++i) {
+            for(j = 0; j < first -> M; ++j) {
+                // for operators between trivial matrices and neural matrices, the
+                difference -> matrix[i][j] = first -> matrix[i][j] -> data - second -> matrix[i][j];
+            }
+        }
+        return difference;
+    } else {
+        throw std::length_error("Dimension mismatch");
+    }
+}
+
+
 Matrix<long double>* matrix_operators::hadamard_product(const Matrix<long double>* first, const NeuralMatrix *other)  {
     if(first -> N == other -> N && first -> M == other -> M) {
         Matrix<long double> *product = new Matrix<long double>(first -> N, first -> M);
@@ -44,7 +64,7 @@ Matrix<long double>* matrix_operators::hadamard_product(const Matrix<long double
         for(i = 0; i < first -> N; ++i) {
             for(j = 0; j < first -> M; ++j) {
                 // for operators between trivial matrices and neural matrices, the
-                product -> matrix[i][j] = first -> matrix[i][j] - other -> matrix[i][j] -> data;
+                product -> matrix[i][j] = first -> matrix[i][j] * other -> matrix[i][j] -> data;
             }
         }
         return product;
@@ -52,6 +72,26 @@ Matrix<long double>* matrix_operators::hadamard_product(const Matrix<long double
         throw std::length_error("Dimensions mismatch");
     }
 }
+
+Matrix<long double>* matrix_operators::hadamard_product(const NeuralMatrix* first, const Matrix<long double>* other)  {
+    if(first -> N == other -> N && first -> M == other -> M) {
+        Matrix<long double> *product = new Matrix<long double>(first -> N, first -> M);
+        if(product == nullptr) {
+            return nullptr;
+        }
+        register size_t i, j;
+        for(i = 0; i < first -> N; ++i) {
+            for(j = 0; j < first -> M; ++j) {
+                // for operators between trivial matrices and neural matrices, the
+                product -> matrix[i][j] = first -> matrix[i][j] -> data * other -> matrix[i][j];
+            }
+        }
+        return product;
+    } else {
+        throw std::length_error("Dimensions mismatch");
+    }
+}
+
 
 
 // there's likely a better way to do these multiplications than to write specific cases for the matrices
@@ -110,7 +150,7 @@ Matrix<long double>* matrix_operators::add(const Matrix<long double>* first, con
         for(i = 0; i < first -> N; ++i) {
             for(j = 0; j < first -> M; ++j) {
                 // for operators between trivial matrices and neural matrices, the
-                difference -> matrix[i][j] = first -> matrix[i][j] - other -> matrix[i][j] -> data;
+                difference -> matrix[i][j] = first -> matrix[i][j] + other -> matrix[i][j] -> data;
             }
         }
         return difference;
@@ -118,5 +158,26 @@ Matrix<long double>* matrix_operators::add(const Matrix<long double>* first, con
         throw std::length_error("Dimension mismatch");
     }
 }
+
+
+Matrix<long double>* matrix_operators::add(const NeuralMatrix* first, const Matrix<long double>* other) {
+    if(first -> N == other -> N && first -> M == other -> M) {
+        Matrix<long double> *difference = new Matrix<long double>(first -> N, first -> M);
+        if(difference == nullptr) {
+            return nullptr;
+        }
+        register size_t i, j;
+        for(i = 0; i < first -> N; ++i) {
+            for(j = 0; j < first -> M; ++j) {
+                // for operators between trivial matrices and neural matrices, the
+                difference -> matrix[i][j] = first -> matrix[i][j] -> data + other -> matrix[i][j];
+            }
+        }
+        return difference;
+    } else {
+        throw std::length_error("Dimension mismatch");
+    }
+}
+
 
 #pragma clang diagnostic pop
