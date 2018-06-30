@@ -16,7 +16,7 @@
 
 
 Matrix<long double>* matrix_subtraction(Matrix<long double>* first, const NeuralMatrix *second) {
-    if(first -> equal_size(*second)) {
+    if(first -> N == second -> N && first -> M == second -> M) {
         Matrix<long double> *difference = new Matrix<long double>(first -> N, second -> M);
         if(difference == nullptr) {
             return nullptr;
@@ -35,7 +35,7 @@ Matrix<long double>* matrix_subtraction(Matrix<long double>* first, const Neural
 }
 
 Matrix<long double>* hadamard_product(Matrix<long double>* first, const NeuralMatrix *other)  {
-    if(first -> equal_size(*other)) {
+    if(first -> N == other -> N && first -> M == other -> M) {
         Matrix<long double> *product = new Matrix<long double>(first -> N, first -> M);
         if(product == nullptr) {
             return nullptr;
@@ -80,7 +80,7 @@ Matrix<long double>* matrix_multiplication(const Matrix<long double>* first, con
 
 
 Matrix<long double>* matrix_add(const Matrix<long double>* first, const NeuralMatrix* other) {
-    if(first -> equal_size(*other)) {
+    if(first -> N == other -> N && first -> M == other -> M) {
         Matrix<long double> *difference = new Matrix<long double>(first -> N, first -> M);
         if(difference == nullptr) {
             return nullptr;

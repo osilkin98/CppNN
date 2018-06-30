@@ -8,7 +8,7 @@
 #include <vector>
 #include <cstddef>
 #include <iostream>
-#include "neural_matrix.h"
+
 
 
 template <typename T>
