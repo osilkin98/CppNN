@@ -1,12 +1,39 @@
 #include <iostream>
-#include "src/matrix.h"
 #include "src/neural_network.h"
+#include "src/matrix_operators.h"
 // #include "linear_algebra.cpp"
 
 // #include "linear_algebra.cpp"
 
 int main(void) {
 
+    Matrix<long double> *one = new Matrix<long double>(3, 4), *three, *four, *five, *six;
+    NeuralMatrix *two = new NeuralMatrix(3, 4, false, true);
+
+    std::cout << "\nOne:\n";
+    one -> print();
+    std::cout << "\nTwo:\n";
+    two -> print();
+
+    three = matrix_operators::add(one, two);
+    four = matrix_operators::subtract(one, two);
+    five = matrix_operators::hadamard_product(one, two);
+    if(three != nullptr) {
+        std::cout << "\nAddition:\n";
+        three -> print();
+        std::cout << "\nSubtraction:\n";
+        four -> print();
+        std::cout << "\nHadamard Product:\n";
+        five -> print();
+    }
+
+    std::cout << std::endl;
+
+    delete one;
+    delete two;
+    delete three;
+    delete four;
+    delete five;
 
 
 

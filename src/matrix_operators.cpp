@@ -15,7 +15,7 @@
 #include "matrix_operators.h"
 
 
-Matrix<long double>* matrix_operators::subtract(Matrix<long double>* first, const NeuralMatrix *second) {
+Matrix<long double>* matrix_operators::subtract(const Matrix<long double>* first, const NeuralMatrix *second) {
     if(first -> N == second -> N && first -> M == second -> M) {
         Matrix<long double> *difference = new Matrix<long double>(first -> N, second -> M);
         if(difference == nullptr) {
@@ -34,7 +34,7 @@ Matrix<long double>* matrix_operators::subtract(Matrix<long double>* first, cons
     }
 }
 
-Matrix<long double>* matrix_operators::hadamard_product(Matrix<long double>* first, const NeuralMatrix *other)  {
+Matrix<long double>* matrix_operators::hadamard_product(const Matrix<long double>* first, const NeuralMatrix *other)  {
     if(first -> N == other -> N && first -> M == other -> M) {
         Matrix<long double> *product = new Matrix<long double>(first -> N, first -> M);
         if(product == nullptr) {
@@ -57,7 +57,7 @@ Matrix<long double>* matrix_operators::hadamard_product(Matrix<long double>* fir
 // there's likely a better way to do these multiplications than to write specific cases for the matrices
 // using something like iterators for data members and then just iterating through and returning a vector of
 // doubles which is the resuult of whatever multiplicatios
-Matrix<long double>* matrix_operators::multiply(const Matrix<long double>* first, const NeuralMatrix* other)  {
+Matrix<long double>* matrix_operators::multiply(const Matrix<long double> *first, const NeuralMatrix *other)  {
     if(first -> M == other -> N) {
         Matrix<long double> *product = new Matrix<long double>(first -> N, other -> M);
         if(product == nullptr) {

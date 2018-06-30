@@ -13,9 +13,13 @@
  * */
 
 namespace matrix_operators {
-    Matrix<long double> *subtract(Matrix<long double> *first, const NeuralMatrix *second);
+    Matrix<long double> *subtract(const Matrix<long double> *first, const NeuralMatrix *second);
 
-    Matrix<long double> *hadamard_product(Matrix<long double> *first, const NeuralMatrix *other);
+    Matrix<long double> *subtract(const NeuralMatrix *first, const Matrix<long double> *second);
+
+    Matrix<long double> *hadamard_product(const Matrix<long double> *first, const NeuralMatrix *other);
+
+    Matrix<long double> *hadamard_product(const NeuralMatrix *first, const Matrix<long double> *other);
 
     Matrix<long double> *multiply(const Matrix<long double> *first, const NeuralMatrix *other);
 
@@ -23,6 +27,7 @@ namespace matrix_operators {
 
     Matrix<long double> *add(const Matrix<long double> *first, const NeuralMatrix *other);
 
+    Matrix<long double> *add(const NeuralMatrix *first, const Matrix<long double> *other);
 
 };
 
