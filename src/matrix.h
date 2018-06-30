@@ -195,7 +195,7 @@ void Matrix<T>::zero_matrix(void) {
 
 
 template <typename T>
-void Matrix<T>::print(void) const {
+void Matrix<T>::print() const {
     std::cout << "\n";
     size_t i, j;
     for(i = 0; i < N; ++i) {
