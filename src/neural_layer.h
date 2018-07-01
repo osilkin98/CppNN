@@ -11,7 +11,8 @@ class NeuralLayer {
 private:
     void clean();
 
-    NeuralMatrix *data, *bias, *weights;
+    NeuralMatrix *data;
+    Matrix<long double> *bias, *weights;
 
 
 public:
