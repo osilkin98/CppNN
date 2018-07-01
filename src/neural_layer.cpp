@@ -2,6 +2,7 @@
 // Created by Oleg on 6/14/2018.
 //
 
+#include <memory>
 #include "neural_layer.h"
 #include "matrix_operators.h"
 
@@ -54,16 +55,19 @@ NeuralLayer& NeuralLayer::operator=(const NeuralLayer& other) {
     if(this != &other) {
         std::cout << this << " != " << &other << "\n";
         // Matrix<Neuron *>::operator=(other);
-        N = other.N;
+
+        std::unique_ptr< Matrix<long double> > t_weights = new Matrix<long double>(*other.weights),
+                t_bias = new Matrix<long double>(*other.bias);
+        std::unique_ptr< NeuralMatrix > t_data = new NeuralMatrix(*other.data);
+
+
         delete weights;
-        weights = nullptr;
-        weights = new Matrix<long double>(*other.weights);
+        weights = t_weights.release();
         delete bias;
-        bias = nullptr;
-        bias = new Matrix<long double>(*other.bias);
+        bias = t_bias.release();
         delete data;
-        data = nullptr;
-        data = new NeuralMatrix(*other.data);
+        data = t_data.release();
+        N = other.N;
     }
     return *this;
 }
