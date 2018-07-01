@@ -3,6 +3,7 @@
 //
 
 #include "neural_network.h"
+#include "matrix_operators.h"
 
 /************ CONSTRUCTORS AND DESTRUCTORS *******************************/
 NeuralNetwork::NeuralNetwork(const size_t *dimensions, const size_t N, std::string new_label, long double rate)
@@ -140,18 +141,22 @@ void NeuralNetwork::back_propogate(const std::vector<long double> &correct_data)
     * you're only going to be accessing the last ones, but it's nice to keep a reference of them anyway.
     * At some point the NeuralMatrix pointer will become a smart pointer and I'll be able to return these
     * without getting a bunch of cloggged up memory */
-    std::vector<NeuralMatrix*> error_vectors(layers.size(), nullptr);
+    std::vector<Matrix<long double> *> error_vectors(layers.size(), nullptr);
     // should create a copy of the last layer (output)
-    error_vectors[error_vectors.size() - 1] = new NeuralMatrix(*layers[layers.size() - 1] -> data);
+    // initialize last error vector to contain the values of the data vector's function
+    error_vectors[error_vectors.size() - 1] =
+            matrix_operators::create(layers[layers.size() - 1] -> data, matrix_operators::function);
 
 
     // data.size = length of output layer
+
+    // loop creates the correct values for the error vector at the end
     for(register size_t i = 0; i < correct_data.size(); ++i) {
-        error_vectors[error_vectors.size() - 1] -> matrix[i][0] -> set(
+        error_vectors[error_vectors.size() - 1] -> matrix[i][0] =
                 (layers[layers.size() - 1] -> data -> matrix[i][0] -> function - correct_data[i]) *
-                layers[layers.size() - 1] -> data -> matrix[i][0] -> function_derivative);
+                layers[layers.size() - 1] -> data -> matrix[i][0] -> function_derivative;
     }
-    NeuralMatrix *temp, *wt;
+    Matrix<long double> *temp, *wt;
     long double del;
     register size_t i, j, k;
     // this loop performs the routine delta(l) = ((transpose(weight(l+1)) * delta(l+1)) * sigma'(z(l))
@@ -171,14 +176,14 @@ void NeuralNetwork::back_propogate(const std::vector<long double> &correct_data)
              * by the learning rate, and save that as our del. This is what we'll subtract from the bias vector and
              * the weights matrix in order to back-propogate correctly
              */
-            del = learning_rate * (temp -> matrix[j][0] -> data *=
+            del = learning_rate * (temp -> matrix[j][0] *=
                                            layers[i] -> data -> matrix[j][0] -> function_derivative);
             // subtract the delta from the bias
-            layers[i] -> bias -> matrix[j][0] -> data -= del;
+            layers[i] -> bias -> matrix[j][0]-= del;
             // for the weight matrix, it's dC/d(w^(l)_{j,k}) = a^(l-1)_k * del(l)_j, so we have to multiply through
             // each value in order to update the weights matrix
             for(k = 0; k < layers[i - 1] -> data -> N; ++k) {
-                layers[i]->weights->matrix[j][k]->data -= layers[i - 1]->data->matrix[k][0]->data * del;
+                layers[i] -> weights -> matrix[j][k] -= layers[i - 1] -> data -> matrix[k][0] -> data * del;
             }
         }
         temp -> print();
@@ -188,7 +193,6 @@ void NeuralNetwork::back_propogate(const std::vector<long double> &correct_data)
         error_vectors[i] = temp;
         delete wt;
     }
-    temp = nullptr;
     // to make sure this works correctly
     if(error_vectors[0] != nullptr) {
         std::cerr << "Error: the 0th index of error_vector non-null\n";
