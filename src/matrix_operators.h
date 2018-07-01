@@ -37,6 +37,10 @@ namespace matrix_operators {
     /* the field parameter specifies which field to grab from the Neuron objects */
     Matrix<long double> *create(const NeuralMatrix* other, const Mode mod = data);
 
+    // to create randomized matrices
+    Matrix<long double> *create_randomized_matrix(const size_t N, const size_t M = 1,
+            long double mean = 0.0, long double stddev = 2.0);
+
 };
 
 #endif //NEURALNETWORKS_MATRIX_OPERATORS_H
