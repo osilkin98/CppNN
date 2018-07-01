@@ -50,16 +50,22 @@ NeuralLayer::~NeuralLayer() {
 
 // This is to set the other object to the calling object
 NeuralLayer& NeuralLayer::operator=(const NeuralLayer& other) {
-    // this code could probably be cleaned up but it's too much extra overhead to deal with for something that isn't changing
-    Matrix<long double> *temp = weights;
-    weights = other.weights;
-    delete temp;
-    temp = bias;
-    bias = other.bias;
-    delete temp;
-    NeuralMatrix *placeholder = data;
-    data = other.data;
-    delete placeholder;
+    std::cout << "Assignment operator called\n";
+    if(this != &other) {
+        std::cout << this << " != " << &other << "\n";
+        // Matrix<Neuron *>::operator=(other);
+        N = other.N;
+        delete weights;
+        weights = nullptr;
+        weights = new Matrix<long double>(*other.weights);
+        delete bias;
+        bias = nullptr;
+        bias = new Matrix<long double>(*other.bias);
+        delete data;
+        data = nullptr;
+        data = new NeuralMatrix(*other.data);
+    }
+    return *this;
 }
 
 // this just performs the forward pass operation for one Layer from the other
