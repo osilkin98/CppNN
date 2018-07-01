@@ -13,12 +13,11 @@ private:
 
     NeuralMatrix *data;
 
+    Matrix<long double> *bias, *weights;
+
     size_t N;
 
 public:
-    Matrix<long double> *bias, *weights;
-
-
 
     // operator to assign one neural layer object to another
     NeuralLayer& operator=(const NeuralLayer& other);
