@@ -56,9 +56,9 @@ NeuralLayer& NeuralLayer::operator=(const NeuralLayer& other) {
         std::cout << this << " != " << &other << "\n";
         // Matrix<Neuron *>::operator=(other);
 
-        std::unique_ptr< Matrix<long double> > t_weights = new Matrix<long double>(*other.weights),
-                t_bias = new Matrix<long double>(*other.bias);
-        std::unique_ptr< NeuralMatrix > t_data = new NeuralMatrix(*other.data);
+        std::unique_ptr< Matrix<long double> > t_weights(new Matrix<long double>(*other.weights)),
+                t_bias(new Matrix<long double>(*other.bias));
+        std::unique_ptr< NeuralMatrix > t_data(new NeuralMatrix(*other.data));
 
 
         delete weights;

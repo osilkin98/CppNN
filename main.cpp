@@ -7,38 +7,18 @@
 
 int main(void) {
 
-    Matrix<long double> *one = new Matrix<long double>(3, 4), *three, *four, *five, *six;
-    NeuralMatrix *two = new NeuralMatrix(3, 4, false, true);
+    NeuralLayer one(2, 3), two(3, 4);
 
-    std::cout << "\nOne:\n";
-    one -> print();
-    std::cout << "\nTwo:\n";
-    two -> print();
-
-    three = matrix_operators::add(one, two);
-    four = matrix_operators::subtract(one, two);
-    five = matrix_operators::hadamard_product(one, two);
-    if(three != nullptr) {
-        std::cout << "\nAddition:\n";
-        three -> print();
-        std::cout << "\nSubtraction:\n";
-        four -> print();
-        std::cout << "\nHadamard Product:\n";
-        five -> print();
-    }
-
-    std::cout << std::endl;
-
-    delete one;
-    delete two;
-    delete three;
-    delete four;
-    delete five;
-
-
-
-
-
+    std::cout << "-------- ONE -----------\n";
+    one.print();
+    std::cout << "-------- TWO -----------\n";
+    two.print();
+    two = one;
+    two.weights -> matrix[0][0] = 100;
+    std::cout << "-------- ONE -----------\n";
+    one.print();
+    std::cout << "-------- TWO -----------\n";
+    two.print();
     /*
 
     std::vector<size_t> sizes = {3, 4, 2};

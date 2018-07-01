@@ -39,7 +39,9 @@ public:
 
     Matrix<T>* operator-(const Matrix<T>* other) const;
 
-   // Matrix<long double>* operator-(const NeuralMatrix* other) const;
+    // Matrix<T>& operator=(const Matrix<T>& other);
+
+    // Matrix<long double>* operator-(const NeuralMatrix* other) const;
 
     // for transposing other matrices
     static Matrix<T> *transpose(const Matrix<T>* other);
@@ -180,6 +182,17 @@ Matrix<T>* Matrix<T>::operator*(const Matrix<T> *other) const {
     }
 }
 
+/*
+template <typename T>
+Matrix<T>& Matrix<T>::operator=(const Matrix<T> &other) {
+    if(this != &other) {
+        matrix = other.matrix;
+        N = other.N;
+        M = other.M;
+    }
+    return *this;
+}
+*/
 
 template <typename T>
 void Matrix<T>::zero_matrix(void) {
