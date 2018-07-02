@@ -1,13 +1,25 @@
 #include <iostream>
-#include "src/linear_algebra.h"
 #include "src/neural_network.h"
+#include "src/matrix_operators.h"
 // #include "linear_algebra.cpp"
 
 // #include "linear_algebra.cpp"
 
 int main(void) {
 
+    NeuralLayer one(2, 3), two(3, 4);
 
+    std::cout << "-------- ONE -----------\n";
+    one.print();
+    std::cout << "-------- TWO -----------\n";
+    two.print();
+    two = one;
+    two.weights -> matrix[0][0] = 100;
+    std::cout << "-------- ONE -----------\n";
+    one.print();
+    std::cout << "-------- TWO -----------\n";
+    two.print();
+    /*
 
     std::vector<size_t> sizes = {3, 4, 2};
 
@@ -26,7 +38,7 @@ int main(void) {
     NN.back_propogate(correct_data);
     NN.print_all();
     std::cout << std::endl;
-
+*/
     return 0;
 
 

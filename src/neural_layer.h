@@ -11,10 +11,13 @@ class NeuralLayer {
 private:
     void clean();
 
-    NeuralMatrix *data, *bias, *weights;
+    NeuralMatrix *data;
+
+    Matrix<long double> *bias, *weights;
+
+    size_t N;
 
 public:
-    const size_t N;
 
     // operator to assign one neural layer object to another
     NeuralLayer& operator=(const NeuralLayer& other);

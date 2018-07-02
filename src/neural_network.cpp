@@ -3,6 +3,7 @@
 //
 
 #include "neural_network.h"
+#include "matrix_operators.h"
 
 /************ CONSTRUCTORS AND DESTRUCTORS *******************************/
 NeuralNetwork::NeuralNetwork(const size_t *dimensions, const size_t N, std::string new_label, long double rate)
@@ -129,7 +130,6 @@ void NeuralNetwork::print_all(void) const {
  *
  * */
 void NeuralNetwork::back_propogate(const std::vector<long double> &correct_data) const {
-    std::cout << "Inside back propogation\n";
     // check to see if the given data set matches the size of the output vector
     if(correct_data.size() != layers[layers.size() - 1] -> data -> N) {
         throw std::length_error("Length of given dataset doesn't match up with output layer");
@@ -141,37 +141,36 @@ void NeuralNetwork::back_propogate(const std::vector<long double> &correct_data)
     * you're only going to be accessing the last ones, but it's nice to keep a reference of them anyway.
     * At some point the NeuralMatrix pointer will become a smart pointer and I'll be able to return these
     * without getting a bunch of cloggged up memory */
-    std::vector<NeuralMatrix*> error_vectors(layers.size(), nullptr);
+    std::vector<Matrix<long double> *> error_vectors(layers.size(), nullptr);
     // should create a copy of the last layer (output)
-    error_vectors[error_vectors.size() - 1] = new NeuralMatrix(*layers[layers.size() - 1] -> data);
+    // initialize last error vector to contain the values of the data vector's function
+    error_vectors[error_vectors.size() - 1] =
+            matrix_operators::create(layers[layers.size() - 1] -> data, matrix_operators::function);
 
-    std::cout << "About to enter first loop\n";
 
-    std::cout << "Correct_data.size() = " << correct_data.size() << '\n';
     // data.size = length of output layer
+
+    // loop creates the correct values for the error vector at the end
     for(register size_t i = 0; i < correct_data.size(); ++i) {
-        std::cout << "i: " << i << '\n';
-        error_vectors[error_vectors.size() - 1] -> matrix[i][0] -> set(
+        error_vectors[error_vectors.size() - 1] -> matrix[i][0] =
                 (layers[layers.size() - 1] -> data -> matrix[i][0] -> function - correct_data[i]) *
-                layers[layers.size() - 1] -> data -> matrix[i][0] -> function_derivative);
+                layers[layers.size() - 1] -> data -> matrix[i][0] -> function_derivative;
     }
-    NeuralMatrix *temp, *wt;
-    long double del;
-    register size_t i, j, k;
-    std::cout << "about to enter the main loop\n";
+    Matrix<long double> *temp = NULL, *wt = NULL;
+    long double del = 0;
+    size_t i = 0;
+    size_t j = 0;
+    size_t k = 0;
     // this loop performs the routine delta(l) = ((transpose(weight(l+1)) * delta(l+1)) * sigma'(z(l))
     for(i = error_vectors.size() - 2; i != 0; --i) {
-        std::cout << "i: " << i << "\n";
         // here we have to get a copy of the transpose matrix
         wt = layers[i + 1] -> weights -> transpose();
 
-        std::cout <<  "Computed weight, setting temp vector\n";
         // this performs the matrix multiplication of weight(l+1)^T * delta(l+1)
         temp = *wt * error_vectors[i + 1];
 
         /* now that we have completed the matrix multiplication we'll need to actually compute the
          * element-wise product for ((w(l+1)^T) * delta(l+1)) (x) sigma'(z'(l)) */
-        std::cout << "About to compute error vector for weight matrix\n";
         for(j = 0; j < temp -> N; ++j) {
 
             /* we'll set each individual element equal to the element wise product of the lefthand side and righthand
@@ -179,17 +178,16 @@ void NeuralNetwork::back_propogate(const std::vector<long double> &correct_data)
              * by the learning rate, and save that as our del. This is what we'll subtract from the bias vector and
              * the weights matrix in order to back-propogate correctly
              */
-            del = learning_rate * (temp -> matrix[j][0] -> data *=
-                                                  layers[i] -> data -> matrix[j][0] -> function_derivative);
+            del = learning_rate * (temp -> matrix[j][0] *=
+                                           layers[i] -> data -> matrix[j][0] -> function_derivative);
             // subtract the delta from the bias
-            layers[i] -> bias -> matrix[j][0] -> data -= del;
+            layers[i] -> bias -> matrix[j][0]-= del;
             // for the weight matrix, it's dC/d(w^(l)_{j,k}) = a^(l-1)_k * del(l)_j, so we have to multiply through
             // each value in order to update the weights matrix
             for(k = 0; k < layers[i - 1] -> data -> N; ++k) {
-                layers[i]->weights->matrix[j][k]->data -= layers[i - 1]->data->matrix[k][0]->data * del;
+                layers[i] -> weights -> matrix[j][k] -= layers[i - 1] -> data -> matrix[k][0] -> data * del;
             }
         }
-        std::cout << "Printing error vector for layer " << i  << ":\n";
         temp -> print();
         /* finally, since we're done computing the hadamard product of the lefthand side and the righthand side
          * we place the temp pointer in our actual error_vectors vector and delete the transpose we used
@@ -197,8 +195,6 @@ void NeuralNetwork::back_propogate(const std::vector<long double> &correct_data)
         error_vectors[i] = temp;
         delete wt;
     }
-    std::cout << "outside main loop\n";
-    temp = nullptr;
     // to make sure this works correctly
     if(error_vectors[0] != nullptr) {
         std::cerr << "Error: the 0th index of error_vector non-null\n";

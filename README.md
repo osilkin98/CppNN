@@ -10,8 +10,9 @@ speed and efficiency of C++.
 
 ### Todo:
 - [x] Implement Back-Propagation
+- [ ] Implement Namespaces for Library Hierarchy
 - [ ] Optimize Code
-- [ ] Move Weight & Bias from NeuralMatrix to simpler struct/class
+- [x] Move Weight & Bias from NeuralMatrix to simpler struct/class
 - [ ] Parallelize Routines in order to drastically decrease runtime
 - [ ] Add Functionality for Generic Evalutionary Algorithms
 - [ ] Learning Model Selection
