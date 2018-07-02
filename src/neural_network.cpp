@@ -156,9 +156,11 @@ void NeuralNetwork::back_propogate(const std::vector<long double> &correct_data)
                 (layers[layers.size() - 1] -> data -> matrix[i][0] -> function - correct_data[i]) *
                 layers[layers.size() - 1] -> data -> matrix[i][0] -> function_derivative;
     }
-    Matrix<long double> *temp, *wt;
-    long double del;
-    register size_t i, j, k;
+    Matrix<long double> *temp = NULL, *wt = NULL;
+    long double del = 0;
+    size_t i = 0;
+    size_t j = 0;
+    size_t k = 0;
     // this loop performs the routine delta(l) = ((transpose(weight(l+1)) * delta(l+1)) * sigma'(z(l))
     for(i = error_vectors.size() - 2; i != 0; --i) {
         // here we have to get a copy of the transpose matrix
