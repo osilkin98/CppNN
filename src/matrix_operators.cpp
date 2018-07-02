@@ -14,6 +14,7 @@
 #include "matrix_operators.h"
 #include <random>
 #include <ctime>
+#include <chrono>
 
 Matrix<long double>* matrix_operators::subtract(const Matrix<long double>* first, const NeuralMatrix *second) {
     if(first -> N == second -> N && first -> M == second -> M) {
@@ -217,7 +218,7 @@ Matrix<long double>* matrix_operators::create(const NeuralMatrix *other, const m
 Matrix<long double>* matrix_operators::create_randomized_matrix(const size_t N, const size_t M,
                                                                 long double mean, long double stddev) {
     Matrix<long double> *new_matrix = new Matrix<long double>(N, M);
-    std::default_random_engine eng(static_cast<size_t>(time(0)));
+    std::mt19937_64 eng{static_cast<long unsigned int>(std::chrono::high_resolution_clock::now().time_since_epoch().count())};
     std::normal_distribution<long double> distribution(mean, stddev);
     register size_t i, j;
     for(i = 0; i < N; ++i) {
