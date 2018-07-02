@@ -11,6 +11,7 @@
 
 
 
+
 template <typename T>
 class Matrix {
 public:
@@ -39,7 +40,7 @@ public:
 
     Matrix<T>* operator-(const Matrix<T>* other) const;
 
-    // Matrix<T>& operator=(const Matrix<T>& other);
+    Matrix<T>& operator=(const Matrix<T>& other);
 
     // Matrix<long double>* operator-(const NeuralMatrix* other) const;
 
@@ -221,7 +222,23 @@ void Matrix<T>::print() const {
     std::cout << std::endl;
 }
 
-
+template <typename T>
+Matrix<T>& Matrix<T>::operator=(const Matrix<T> &other) {
+    if(this != &other) {
+        register size_t i;
+        for(i = 0; i < N; ++i) {
+            matrix[i].clear();
+        }
+        matrix.clear();
+        matrix = other.matrix;
+        for(i = 0; i < other.N; ++i) {
+            matrix[i] = other.matrix[i];
+        }
+        N = other.N;
+        M = other.M;
+    }
+    return *this;
+}
 
 #endif //NEURALNETWORKS_MATRIX_H
 #pragma clang diagnostic pop
