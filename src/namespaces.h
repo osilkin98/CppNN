@@ -7,6 +7,11 @@
 #ifndef NEURALNETWORKS_NAMESPACES_H
 #define NEURALNETWORKS_NAMESPACES_H
 
+#include <vector>
+#include <iostream>
+#include <cstddef>
+
+
 namespace neural_networks {
     namespace utilities {
 
@@ -102,12 +107,13 @@ neural_networks::utilities::Matrix<T>::Matrix(const std::vector<std::vector<T>> 
         : N(other_matrix.size()), M(other_matrix.size() ? other_matrix[0].size() : 0), matrix(other_matrix) { }
 
 template <typename T>
-Matrix<T> *neural_networks::utilities::Matrix<T>::transpose(const Matrix<T>* other) {
+neural_networks::utilities::Matrix<T> *neural_networks::utilities::Matrix<T>::transpose(
+        const neural_networks::utilities::Matrix<T>* other) {
     if(!(other -> valid())) {
         return nullptr;
     }
 
-    Matrix<T> *transposed = new Matrix(other -> M, other -> N);
+    neural_networks::utilities::Matrix<T> *transposed = new Matrix(other -> M, other -> N);
 
     register size_t i, j;
 
@@ -120,7 +126,7 @@ Matrix<T> *neural_networks::utilities::Matrix<T>::transpose(const Matrix<T>* oth
 }
 
 template <typename T>
-Matrix<T>* neural_networks::utilities::Matrix<T>::transpose() const {
+neural_networks::utilities::Matrix<T>* neural_networks::utilities::Matrix<T>::transpose() const {
     std::vector< std::vector<T> > temp_vector(M, std::vector<T>(N));
     register size_t i, j;
     for(i = 0; i < N; ++i) {
@@ -128,15 +134,15 @@ Matrix<T>* neural_networks::utilities::Matrix<T>::transpose() const {
             temp_vector[j][i] = matrix[i][j];
         }
     }
-    Matrix<T> *to_return = new Matrix<T>(temp_vector);
+    neural_networks::utilities::Matrix<T> *to_return = new neural_networks::utilities::Matrix<T>(temp_vector);
     return to_return;
 }
 
 template <typename T>
-Matrix<T>* neural_networks::utilities::Matrix<T>::operator+(
-        const Matrix<T>* other) const {
+neural_networks::utilities::Matrix<T>* neural_networks::utilities::Matrix<T>::operator+(
+        const neural_networks::utilities::Matrix<T>* other) const {
     if(this -> equal_size(*other)) {
-        Matrix<T> *C = new Matrix<T>(N, M);
+        neural_networks::utilities::Matrix<T> *C = new neural_networks::utilities::Matrix<T>(N, M);
         register size_t i, j;
         for(i = 0; i < N; ++i) {
             for(j = 0; j < M; ++j) {
@@ -149,9 +155,10 @@ Matrix<T>* neural_networks::utilities::Matrix<T>::operator+(
 }
 
 template <typename T>
-Matrix<T>* neural_networks::utilities::Matrix<T>::operator-(const Matrix<T>* other) const {
+neural_networks::utilities::Matrix<T>* neural_networks::utilities::Matrix<T>::operator-(
+        const neural_networks::utilities::Matrix<T>* other) const {
     if(this -> equal_size(*other)) {
-        Matrix<T> *C = new Matrix<T>(N, M);
+        neural_networks::utilities::Matrix<T> *C = new neural_networks::utilities::Matrix<T>(N, M);
         if(!C) {
             std::cerr << "Failed to allocate matrix product\n";
             return nullptr;
@@ -168,9 +175,10 @@ Matrix<T>* neural_networks::utilities::Matrix<T>::operator-(const Matrix<T>* oth
 }
 
 template <typename T>
-Matrix<T>* neural_networks::utilities::Matrix<T>::hadamard_product(const Matrix<T>* other) const {
+neural_networks::utilities::Matrix<T>* neural_networks::utilities::Matrix<T>::hadamard_product(
+    const neural_networks::utilities::Matrix<T>* other) const {
     if(N == other -> N && M == other -> M) {
-        Matrix<T> *product = new Matrix(N, M);
+        neural_networks::utilities::Matrix<T> *product = new Matrix(N, M);
         if(!product) {
             std::cerr << "hadamard_product: Failure to allocate new matrix\n";
             return nullptr;
@@ -188,9 +196,10 @@ Matrix<T>* neural_networks::utilities::Matrix<T>::hadamard_product(const Matrix<
 
 
 template <typename T>
-Matrix<T>* neural_networks::utilities::Matrix<T>::operator*(const Matrix<T> *other) const {
+neural_networks::utilities::Matrix<T>* neural_networks::utilities::Matrix<T>::operator*(
+        const neural_networks::utilities::Matrix<T> *other) const {
     if(M == other -> N) {
-        Matrix<T> *C  = new Matrix(N, other -> M);
+        neural_networks::utilities::Matrix<T> *C  = new Matrix(N, other -> M);
         if(!C) {
             std::cerr << "Matrix Multiplication: Unable to allocate new matrix product\n";
             return nullptr;
@@ -250,7 +259,8 @@ void neural_networks::utilities::Matrix<T>::print() const {
 }
 
 template <typename T>
-Matrix<T>& neural_networks::utilities::Matrix<T>::operator=(const Matrix<T> &other) {
+neural_networks::utilities::Matrix<T>& neural_networks::utilities::Matrix<T>::operator=(
+        const neural_networks::utilities::Matrix<T> &other) {
     if(this != &other) {
         register size_t i;
         for(i = 0; i < N; ++i) {
