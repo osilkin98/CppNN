@@ -10,4 +10,4 @@ set(SOURCE_FILES "main.cpp" "linear_algebra.h")
 # add_library(linear_algebra INTERFACE)
 add_executable(NeuralNetworks main.cpp src/neural_layer.cpp src/neural_layer.h src/neural_matrix.cpp
         src/neural_matrix.h src/matrix.h src/neural_network.cpp src/neural_network.h
-        src/matrix_operators.cpp src/matrix_operators.h)
+        src/matrix_operators.cpp src/matrix_operators.h src/namespaces.h)
