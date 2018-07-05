@@ -9,6 +9,18 @@
 
 namespace neural_networks {
     namespace utilities {
+        namespace activation_functions {
+            /***** ACTIVATION FUNCTIONS ********/
+
+            long double sigmoid(long double input);
+
+            long double sigmoid_derivative(long double input);
+
+            long double ReLU(long double input);
+
+            long double ReLU_derivative(long double input);
+
+        }
         namespace components {
             template <typename T>
             class Matrix {
@@ -75,6 +87,7 @@ namespace neural_networks {
         class Neuron;
         class NeuralMatrix;
         class NeuralLayer;
+
         namespace matrix_operators { } // to be defined elsewhere
     }
 
