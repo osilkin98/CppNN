@@ -1,6 +1,6 @@
 # Neural Networks
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) 
-[![Version](https://img.shields.io/badge/Version-0.1-brightgreen.svg)](README.md)
+[![Version](https://img.shields.io/badge/Version-0.2-brightgreen.svg)](README.md)
 ## Extensible Neural Network library written entirely in C++ 
 
 ### Project Goals:
@@ -10,8 +10,8 @@ speed and efficiency of C++.
 
 ### Todo:
 - [x] Implement Back-Propagation
-- [ ] Implement Namespaces for Library Hierarchy
-- [ ] Optimize Code
+- [x] Implement Namespaces for Library Hierarchy
+- [x] Optimize Space Complexity of Code 
 - [x] Move Weight & Bias from NeuralMatrix to simpler struct/class
 - [ ] Parallelize Routines in order to drastically decrease runtime
 - [ ] Add Functionality for Generic Evalutionary Algorithms
