@@ -6,22 +6,13 @@
 #define NEURALNETWORK_UTILS_H
 
 #include "matrix.h"
+#include "namespaces.h"
 
 
-
-/***** ACTIVATION FUNCTIONS ********/
-
-long double sigmoid(long double input);
-
-long double sigmoid_derivative(long double input);
-
-long double ReLU(long double input);
-
-long double ReLU_derivative(long double input);
 
 
 // template <typename T>
-struct Neuron {
+struct neural_networks::utilities::Neuron {
     typedef long double ld;
     long double data, function, function_derivative;
 
@@ -51,7 +42,8 @@ struct Neuron {
 };
 
 
-class NeuralMatrix : public Matrix<Neuron *> {
+class neural_networks::utilities::NeuralMatrix
+        : public neural_networks::utilities::components::Matrix<Neuron *> {
 public:
 
 
