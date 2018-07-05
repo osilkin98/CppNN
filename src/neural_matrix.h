@@ -43,7 +43,7 @@ struct neural_networks::utilities::Neuron {
 
 
 class neural_networks::utilities::NeuralMatrix
-        : public neural_networks::utilities::components::Matrix<Neuron *> {
+        : public neural_networks::utilities::Matrix<Neuron *> {
 public:
 
 
