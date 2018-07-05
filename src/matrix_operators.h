@@ -5,6 +5,7 @@
 #ifndef NEURALNETWORKS_MATRIX_OPERATORS_H
 #define NEURALNETWORKS_MATRIX_OPERATORS_H
 
+#include "namespaces.h"
 #include "neural_matrix.h"
 #include <string>
 
@@ -13,7 +14,7 @@
  * operations in an intuitive manner
  * */
 
-namespace matrix_operators {
+namespace neural_networks::utilities::matrix_operators {
 
     // this is for the user to specify what mode they want to copy the NeuralMatrix object with
     enum Mode { data = 0, function = 1, derivative = 2};

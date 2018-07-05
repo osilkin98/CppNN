@@ -16,6 +16,8 @@
 #include <ctime>
 #include <chrono>
 
+using namespace neural_networks::utilities;
+
 Matrix<long double>* matrix_operators::subtract(const Matrix<long double>* first, const NeuralMatrix *second) {
     if(first -> N == second -> N && first -> M == second -> M) {
         Matrix<long double> *difference = new Matrix<long double>(first -> N, second -> M);
