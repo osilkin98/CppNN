@@ -9,6 +9,73 @@
 
 namespace neural_networks {
     namespace utilities {
+
+        template <typename T>
+        class Matrix {
+        public:
+            std::vector< std::vector<T> > matrix;
+            size_t N, M;
+
+            virtual const bool valid() const { return N && M; }
+
+
+            virtual const bool equal_size(const Matrix<T>& other) const {
+                return other.N == N && other.M == M;
+            }
+
+            // operator for matrix multiplication
+            Matrix<T>* operator*(const Matrix<T>* other) const;
+
+            /// Matrix<long double>* operator*(const NeuralMatrix* other) const;
+
+            Matrix<T>* hadamard_product(const Matrix<T>* other) const;
+
+            // Matrix<long double>* hadamard_product(const NeuralMatrix* other) const;
+
+            Matrix<T>* operator+(const Matrix<T>* other) const;
+
+            // Matrix<long double>* operator+(const NeuralMatrix* other) const;
+
+            Matrix<T>* operator-(const Matrix<T>* other) const;
+
+            Matrix<T>& operator=(const Matrix<T>& other);
+
+            // Matrix<long double>* operator-(const NeuralMatrix* other) const;
+
+            // for transposing other matrices
+            static Matrix<T> *transpose(const Matrix<T>* other);
+
+            // for transposing this matrix
+            virtual Matrix<T> *transpose() const;
+
+
+
+            explicit Matrix() : N(1), M(1), matrix(N, std::vector<T>(M)) { }
+
+            explicit Matrix(const size_t n, const size_t m = 1) : matrix(n, std::vector<T>(m)), N(n), M(m) { }
+
+            // for copying Matrix objects
+            Matrix(const Matrix<T>& other) : matrix(other.matrix), N(other.N), M(other.M) { }
+
+            explicit Matrix(const std::vector< std::vector<T> >& other_matrix);
+
+
+            // the using_data field controls whether we use the data field or function field to create new matrix
+            // explicit Matrix<long double>(const NeuralMatrix& other, bool using_data = true);
+
+            // Matrix<long double>(const NeuralMatrix& other, const std::vector<long double>& correct_data);
+
+            void zero_matrix();
+
+            virtual ~Matrix() = default;
+
+            virtual void print() const;
+        };
+        class Neuron;
+        class NeuralMatrix;
+        class NeuralLayer;
+
+        namespace matrix_operators { } // to be defined elsewhere
         namespace activation_functions {
             /***** ACTIVATION FUNCTIONS ********/
 
@@ -21,74 +88,6 @@ namespace neural_networks {
             long double ReLU_derivative(long double input);
 
         }
-        namespace components {
-            template <typename T>
-            class Matrix {
-            public:
-                std::vector< std::vector<T> > matrix;
-                size_t N, M;
-
-                virtual const bool valid() const { return N && M; }
-
-
-                virtual const bool equal_size(const Matrix<T>& other) const {
-                    return other.N == N && other.M == M;
-                }
-
-                // operator for matrix multiplication
-                Matrix<T>* operator*(const Matrix<T>* other) const;
-
-                /// Matrix<long double>* operator*(const NeuralMatrix* other) const;
-
-                Matrix<T>* hadamard_product(const Matrix<T>* other) const;
-
-                // Matrix<long double>* hadamard_product(const NeuralMatrix* other) const;
-
-                Matrix<T>* operator+(const Matrix<T>* other) const;
-
-                // Matrix<long double>* operator+(const NeuralMatrix* other) const;
-
-                Matrix<T>* operator-(const Matrix<T>* other) const;
-
-                Matrix<T>& operator=(const Matrix<T>& other);
-
-                // Matrix<long double>* operator-(const NeuralMatrix* other) const;
-
-                // for transposing other matrices
-                static Matrix<T> *transpose(const Matrix<T>* other);
-
-                // for transposing this matrix
-                virtual Matrix<T> *transpose() const;
-
-
-
-                explicit Matrix() : N(1), M(1), matrix(N, std::vector<T>(M)) { }
-
-                explicit Matrix(const size_t n, const size_t m = 1) : matrix(n, std::vector<T>(m)), N(n), M(m) { }
-
-                // for copying Matrix objects
-                Matrix(const Matrix<T>& other) : matrix(other.matrix), N(other.N), M(other.M) { }
-
-                explicit Matrix(const std::vector< std::vector<T> >& other_matrix);
-
-
-                // the using_data field controls whether we use the data field or function field to create new matrix
-                // explicit Matrix<long double>(const NeuralMatrix& other, bool using_data = true);
-
-                // Matrix<long double>(const NeuralMatrix& other, const std::vector<long double>& correct_data);
-
-                void zero_matrix();
-
-                virtual ~Matrix() = default;
-
-                virtual void print() const;
-            };
-        }
-        class Neuron;
-        class NeuralMatrix;
-        class NeuralLayer;
-
-        namespace matrix_operators { } // to be defined elsewhere
     }
 
     class NeuralNetwork;
@@ -99,11 +98,11 @@ namespace neural_networks {
 #include <iostream>
 
 template <typename T>
-neural_networks::utilities::components::Matrix<T>::Matrix(const std::vector<std::vector<T>> &other_matrix)
+neural_networks::utilities::Matrix<T>::Matrix(const std::vector<std::vector<T>> &other_matrix)
         : N(other_matrix.size()), M(other_matrix.size() ? other_matrix[0].size() : 0), matrix(other_matrix) { }
 
 template <typename T>
-Matrix<T> *neural_networks::utilities::components::Matrix<T>::transpose(const Matrix<T>* other) {
+Matrix<T> *neural_networks::utilities::Matrix<T>::transpose(const Matrix<T>* other) {
     if(!(other -> valid())) {
         return nullptr;
     }
@@ -121,7 +120,7 @@ Matrix<T> *neural_networks::utilities::components::Matrix<T>::transpose(const Ma
 }
 
 template <typename T>
-Matrix<T>* neural_networks::utilities::components::Matrix<T>::transpose() const {
+Matrix<T>* neural_networks::utilities::Matrix<T>::transpose() const {
     std::vector< std::vector<T> > temp_vector(M, std::vector<T>(N));
     register size_t i, j;
     for(i = 0; i < N; ++i) {
@@ -134,7 +133,7 @@ Matrix<T>* neural_networks::utilities::components::Matrix<T>::transpose() const 
 }
 
 template <typename T>
-Matrix<T>* neural_networks::utilities::components::Matrix<T>::operator+(
+Matrix<T>* neural_networks::utilities::Matrix<T>::operator+(
         const Matrix<T>* other) const {
     if(this -> equal_size(*other)) {
         Matrix<T> *C = new Matrix<T>(N, M);
@@ -150,7 +149,7 @@ Matrix<T>* neural_networks::utilities::components::Matrix<T>::operator+(
 }
 
 template <typename T>
-Matrix<T>* neural_networks::utilities::components::Matrix<T>::operator-(const Matrix<T>* other) const {
+Matrix<T>* neural_networks::utilities::Matrix<T>::operator-(const Matrix<T>* other) const {
     if(this -> equal_size(*other)) {
         Matrix<T> *C = new Matrix<T>(N, M);
         if(!C) {
@@ -169,7 +168,7 @@ Matrix<T>* neural_networks::utilities::components::Matrix<T>::operator-(const Ma
 }
 
 template <typename T>
-Matrix<T>* neural_networks::utilities::components::Matrix<T>::hadamard_product(const Matrix<T>* other) const {
+Matrix<T>* neural_networks::utilities::Matrix<T>::hadamard_product(const Matrix<T>* other) const {
     if(N == other -> N && M == other -> M) {
         Matrix<T> *product = new Matrix(N, M);
         if(!product) {
@@ -189,7 +188,7 @@ Matrix<T>* neural_networks::utilities::components::Matrix<T>::hadamard_product(c
 
 
 template <typename T>
-Matrix<T>* neural_networks::utilities::components::Matrix<T>::operator*(const Matrix<T> *other) const {
+Matrix<T>* neural_networks::utilities::Matrix<T>::operator*(const Matrix<T> *other) const {
     if(M == other -> N) {
         Matrix<T> *C  = new Matrix(N, other -> M);
         if(!C) {
@@ -224,7 +223,7 @@ Matrix<T>& Matrix<T>::operator=(const Matrix<T> &other) {
 */
 
 template <typename T>
-void neural_networks::utilities::components::Matrix<T>::zero_matrix() {
+void neural_networks::utilities::Matrix<T>::zero_matrix() {
     if(std::is_pointer<T>::value) {
         register size_t i, j;
         for (i = 0; i < N; ++i) {
@@ -237,7 +236,7 @@ void neural_networks::utilities::components::Matrix<T>::zero_matrix() {
 
 
 template <typename T>
-void neural_networks::utilities::components::Matrix<T>::print() const {
+void neural_networks::utilities::Matrix<T>::print() const {
     std::cout << "\n";
     size_t i, j;
     for(i = 0; i < N; ++i) {
@@ -251,7 +250,7 @@ void neural_networks::utilities::components::Matrix<T>::print() const {
 }
 
 template <typename T>
-Matrix<T>& neural_networks::utilities::components::Matrix<T>::operator=(const Matrix<T> &other) {
+Matrix<T>& neural_networks::utilities::Matrix<T>::operator=(const Matrix<T> &other) {
     if(this != &other) {
         register size_t i;
         for(i = 0; i < N; ++i) {
