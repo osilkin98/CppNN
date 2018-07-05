@@ -75,7 +75,8 @@ neural_networks::utilities::Neuron* neural_networks::utilities::Neuron::copy(voi
 
 /***** CONSTRUCTORS **********/
 
-neural_networks::utilities::NeuralMatrix::NeuralMatrix(const std::vector<long double> &vec) : Matrix<Neuron* >(vec.size(), 1) {
+neural_networks::utilities::NeuralMatrix::NeuralMatrix(
+        const std::vector<long double> &vec) : Matrix<Neuron* >(vec.size(), 1) {
     register size_t i;
     for(i = 0; i < N; ++i) {
         matrix[i][0] = new Neuron(vec[i]);
