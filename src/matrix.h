@@ -1,7 +1,7 @@
 //
 // Created by Oleg on 6/27/2018.
 //
-
+/*
 #ifndef NEURALNETWORKS_MATRIX_H
 #define NEURALNETWORKS_MATRIX_H
 
@@ -11,7 +11,7 @@
 
 #include "namespaces.h"
 
-
+*/
 /*
 template <typename T>
 class Matrix {

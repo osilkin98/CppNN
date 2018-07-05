@@ -81,6 +81,9 @@ namespace neural_networks {
     class NeuralNetwork;
 }
 
+#include <vector>
+#include <cstddef>
+#include <iostream>
 
 template <typename T>
 neural_networks::utilities::components::Matrix<T>::Matrix(const std::vector<std::vector<T>> &other_matrix)
