@@ -5,12 +5,15 @@
 #ifndef NEURALNETWORKS_NEURAL_NETWORK_H
 #define NEURALNETWORKS_NEURAL_NETWORK_H
 
-#include "neural_layer.h"
 #include <vector>
+#include "namespaces.h"
+#include "neural_layer.h"
 
-class NeuralNetwork {
+
+
+class neural_networks::NeuralNetwork {
 private:
-    std::vector< NeuralLayer *> layers;
+    std::vector< neural_networks::utilities::NeuralLayer *> layers;
 
     long double learning_rate;
 
@@ -44,9 +47,9 @@ public:
     virtual std::vector<long double> get_data_vector() const;
 
     // to be able to index a certain layer of the network
-    virtual const NeuralLayer* operator[](size_t index) const;
+    virtual const neural_networks::utilities::NeuralLayer* operator[](size_t index) const;
 
-    virtual NeuralLayer *operator[](size_t index);
+    virtual neural_networks::utilities::NeuralLayer *operator[](size_t index);
 
     // to access the learning rate
     long double get_learning_rate() const { return learning_rate; }

@@ -1,24 +1,27 @@
 //
 // Created by Oleg on 6/14/2018.
 //
-
+#include "namespaces.h"
 #include "neural_network.h"
 #include "matrix_operators.h"
+
+
+using namespace neural_networks;
 
 /************ CONSTRUCTORS AND DESTRUCTORS *******************************/
 NeuralNetwork::NeuralNetwork(const size_t *dimensions, const size_t N, std::string new_label, long double rate)
         : layers(N, nullptr), label(new_label), learning_rate(rate) {
-    layers[0] = new NeuralLayer(dimensions[0], 0);
+    layers[0] = new utilities::NeuralLayer(dimensions[0], 0);
     for(register size_t i = 1; i < N; ++i) {
-        layers[i] = new NeuralLayer(dimensions[i], dimensions[i - 1]);
+        layers[i] = new utilities::NeuralLayer(dimensions[i], dimensions[i - 1]);
     }
 }
 
 NeuralNetwork::NeuralNetwork(const std::vector<size_t>& dimensions, std::string new_label, long double rate) :
         layers(dimensions.size(), nullptr), label(new_label), learning_rate(rate) {
-    layers[0] = new NeuralLayer(dimensions[0], 0);
+    layers[0] = new utilities::NeuralLayer(dimensions[0], 0);
     for(register size_t i = 1; i < dimensions.size(); ++i) {
-        layers[i] = new NeuralLayer(dimensions[i], dimensions[i - 1]);
+        layers[i] = new utilities::NeuralLayer(dimensions[i], dimensions[i - 1]);
     }
 }
 
@@ -27,7 +30,7 @@ NeuralNetwork::NeuralNetwork(const std::vector<size_t>& dimensions, std::string 
 NeuralNetwork::NeuralNetwork(const NeuralNetwork &other) : layers(other.layers.size()), learning_rate(other.learning_rate) {
     const size_t N = other.layers.size();
     for(register size_t i = 0; i < N; ++i) {
-        layers[i] = new NeuralLayer(*other.layers[i]);
+        layers[i] = new utilities::NeuralLayer(*other.layers[i]);
     }
 }
 
@@ -84,7 +87,7 @@ void NeuralNetwork::feed_forward(void) const {
 
 /* ACCESSOR METHODS ENABLE THE USER TO DEBUG THEIR NEURAL NETWORK BY ACCESSING SPECIFIC LAYERS */
 
-const NeuralLayer* NeuralNetwork::operator[](const size_t index) const {
+const utilities::NeuralLayer* NeuralNetwork::operator[](const size_t index) const {
     if(index < layers.size()) {
         return layers[index];
     } else {
@@ -95,7 +98,7 @@ const NeuralLayer* NeuralNetwork::operator[](const size_t index) const {
 }
 
 
-NeuralLayer* NeuralNetwork::operator[](const size_t index) {
+utilities::NeuralLayer* NeuralNetwork::operator[](const size_t index) {
     if(index < layers.size()) {
         return layers[index];
     } else {
@@ -141,11 +144,12 @@ void NeuralNetwork::back_propogate(const std::vector<long double> &correct_data)
     * you're only going to be accessing the last ones, but it's nice to keep a reference of them anyway.
     * At some point the NeuralMatrix pointer will become a smart pointer and I'll be able to return these
     * without getting a bunch of cloggged up memory */
-    std::vector<Matrix<long double> *> error_vectors(layers.size(), nullptr);
+    std::vector< utilities::Matrix<long double> *> error_vectors(layers.size(), nullptr);
     // should create a copy of the last layer (output)
     // initialize last error vector to contain the values of the data vector's function
     error_vectors[error_vectors.size() - 1] =
-            matrix_operators::create(layers[layers.size() - 1] -> data, matrix_operators::function);
+            utilities::matrix_operators::create(layers[layers.size() - 1] -> data,
+                                                utilities::matrix_operators::function);
 
 
     // data.size = length of output layer
@@ -156,11 +160,9 @@ void NeuralNetwork::back_propogate(const std::vector<long double> &correct_data)
                 (layers[layers.size() - 1] -> data -> matrix[i][0] -> function - correct_data[i]) *
                 layers[layers.size() - 1] -> data -> matrix[i][0] -> function_derivative;
     }
-    Matrix<long double> *temp = NULL, *wt = NULL;
+    utilities::Matrix<long double> *temp = NULL, *wt = NULL;
     long double del = 0;
-    size_t i = 0;
-    size_t j = 0;
-    size_t k = 0;
+    register size_t i = 0, j = 0, k = 0;
     // this loop performs the routine delta(l) = ((transpose(weight(l+1)) * delta(l+1)) * sigma'(z(l))
     for(i = error_vectors.size() - 2; i != 0; --i) {
         // here we have to get a copy of the transpose matrix
