@@ -61,10 +61,10 @@ public:
     NeuralMatrix(const NeuralMatrix& other);
 
     /* constructors for 1-dimensional & 2-dimensional STL vectors*/
-    NeuralMatrix(const std::vector< long double>& vec);
+    explicit NeuralMatrix(const std::vector< long double>& vec);
 
     // 2-dimensiona std::vector
-    NeuralMatrix(const std::vector< std::vector<long double> >& matrix);
+    explicit NeuralMatrix(const std::vector< std::vector<long double> >& matrix);
 
     // standard constructor
     explicit NeuralMatrix(size_t n, size_t m = 1, bool nullified = false, bool random = false);
@@ -74,7 +74,7 @@ public:
 
     static NeuralMatrix* transpose(const NeuralMatrix* other);
 
-    NeuralMatrix* transpose() const;
+    NeuralMatrix* transpose() const override;
 
     void transpose_self();
 
