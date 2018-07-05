@@ -1,29 +1,47 @@
 #include <iostream>
+#include <random>
+#include <chrono>
 #include "src/neural_network.h"
 #include "src/matrix_operators.h"
+#include "src/namespaces.h"
 // #include "linear_algebra.cpp"
 
 // #include "linear_algebra.cpp"
+
+template <typename T>
+void print_matrix(std::vector< std::vector< T > >& mat) {
+    size_t i, j;
+    for(i = 0; i < mat.size(); ++i) {
+        std::cout << "[ ";
+        for(j = 0; j < mat[i].size(); ++j) {
+            std::cout << mat[i][j] << " ";
+        }
+        std::cout << "]\n";
+    }
+}
+
 
 int main(void) {
 
-    NeuralLayer one(2, 3), two(3, 4);
-
-    std::cout << "-------- ONE -----------\n";
-    one.print();
-    std::cout << "-------- TWO -----------\n";
-    two.print();
-    two = one;
-    two.weights -> matrix[0][0] = 100;
-    std::cout << "-------- ONE -----------\n";
-    one.print();
-    std::cout << "-------- TWO -----------\n";
-    two.print();
     /*
+    Matrix<long double> *one = matrix_operators::create_randomized_matrix(3, 4),
+            *two = matrix_operators::create_randomized_matrix(4, 3);
+
+    one -> print();
+    two -> print();
+
+    *one = *two;
+    one -> print();
+    two -> print();
+
+    delete one;
+    delete two; */
+
+
+
 
     std::vector<size_t> sizes = {3, 4, 2};
-
-    NeuralNetwork NN(sizes);
+    neural_networks::NeuralNetwork NN(sizes);
     std::vector<long double> data = {1, 2, 3};
     NN.set_data(data);
     NN.feed_forward();
@@ -38,7 +56,7 @@ int main(void) {
     NN.back_propogate(correct_data);
     NN.print_all();
     std::cout << std::endl;
-*/
+
     return 0;
 
 
