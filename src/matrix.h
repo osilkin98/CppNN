@@ -1,7 +1,7 @@
 //
 // Created by Oleg on 6/27/2018.
 //
-
+/*
 #ifndef NEURALNETWORKS_MATRIX_H
 #define NEURALNETWORKS_MATRIX_H
 
@@ -9,9 +9,10 @@
 #include <cstddef>
 #include <iostream>
 
+#include "namespaces.h"
 
-
-
+*/
+/*
 template <typename T>
 class Matrix {
 public:
@@ -73,7 +74,8 @@ public:
 
     virtual void print() const;
 };
-
+*/
+/*
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCDFAInspection"
 
@@ -188,7 +190,7 @@ Matrix<T>* Matrix<T>::operator*(const Matrix<T> *other) const {
         return nullptr;
     }
 }
-
+*/
 /*
 template <typename T>
 Matrix<T>& Matrix<T>::operator=(const Matrix<T> &other) {
@@ -201,6 +203,7 @@ Matrix<T>& Matrix<T>::operator=(const Matrix<T> &other) {
 }
 */
 
+/*
 template <typename T>
 void Matrix<T>::zero_matrix() {
     if(std::is_pointer<T>::value) {
@@ -237,9 +240,6 @@ Matrix<T>& Matrix<T>::operator=(const Matrix<T> &other) {
         }
         matrix.clear();
         matrix = other.matrix;
-        for(i = 0; i < other.N; ++i) {
-            matrix[i] = other.matrix[i];
-        }
         N = other.N;
         M = other.M;
     }
@@ -248,3 +248,5 @@ Matrix<T>& Matrix<T>::operator=(const Matrix<T> &other) {
 
 #endif //NEURALNETWORKS_MATRIX_H
 #pragma clang diagnostic pop
+
+ */

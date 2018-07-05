@@ -6,14 +6,15 @@
 #define NEURALNETWORKS_NEURALLAYER_H
 
 #include "neural_matrix.h"
+#include "namespaces.h"
 
-class NeuralLayer {
+class neural_networks::utilities::NeuralLayer {
 private:
     void clean();
 
     NeuralMatrix *data;
 
-    Matrix<long double> *bias, *weights;
+    neural_networks::utilities::Matrix<long double> *bias, *weights;
 
     size_t N;
 
@@ -33,7 +34,7 @@ public:
     void print() const;
     virtual void update(const NeuralLayer& other) const;
 
-    friend class NeuralNetwork;
+    friend class neural_networks::NeuralNetwork;
 };
 
 

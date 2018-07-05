@@ -3,6 +3,7 @@
 //
 
 #include "neural_matrix.h"
+#include "namespaces.h"
 //
 // Created by oleg on 6/4/18.
 //
@@ -18,7 +19,7 @@
 
 /************ NEURON IMPLEMENTATION *************/
 
-const long double Neuron::operator()(const long double input)  {
+const long double neural_networks::utilities::Neuron::operator()(const long double input)  {
     data = input;
     function = activation_function(input);
     function_derivative = activation_function_prime(input);
@@ -27,13 +28,13 @@ const long double Neuron::operator()(const long double input)  {
 
 
 // for "firing" the neuron
-const long double Neuron::operator()(void) {
+const long double neural_networks::utilities::Neuron::operator()(void) {
     return function;
 }
 
 
 // for setting the values of Neuron objects from just one input
-const long double Neuron::set(const Neuron::ld input) {
+const long double neural_networks::utilities::Neuron::set(const neural_networks::utilities::Neuron::ld input) {
     data = input;
     function = activation_function(input);
     function_derivative = activation_function_prime(input);
@@ -41,18 +42,19 @@ const long double Neuron::set(const Neuron::ld input) {
 }
 
 // activation function
-const long double Neuron::activation_function(const long double input) const {
+const long double neural_networks::utilities::Neuron::activation_function(const long double input) const {
     return exp(input) / (exp(input) + 1);
 }
 
 // activation function
-const long double Neuron::activation_function_prime(const long double input) const {
-    return Neuron::activation_function(input) * (1 - Neuron::activation_function(input));
+const long double neural_networks::utilities::Neuron::activation_function_prime(const long double input) const {
+    return neural_networks::utilities::Neuron::activation_function(input) *
+           (1 - neural_networks::utilities::Neuron::activation_function(input));
 }
 
 
 // print function
-void Neuron::print(void) const {
+void neural_networks::utilities::Neuron::print(void) const {
     /*
     std::cout << '\n' << this << ": {\n";
     std::cout << "\tx: " << data << "\n\tσ(x): "
@@ -62,7 +64,7 @@ void Neuron::print(void) const {
 }
 
 
-Neuron* Neuron::copy(void) const {
+neural_networks::utilities::Neuron* neural_networks::utilities::Neuron::copy(void) const {
     Neuron* new_neuron = new Neuron(data);
     return new_neuron;
 }
@@ -73,7 +75,8 @@ Neuron* Neuron::copy(void) const {
 
 /***** CONSTRUCTORS **********/
 
-NeuralMatrix::NeuralMatrix(const std::vector<long double> &vec) : Matrix<Neuron* >(vec.size(), 1) {
+neural_networks::utilities::NeuralMatrix::NeuralMatrix(
+        const std::vector<long double> &vec) : Matrix<Neuron* >(vec.size(), 1) {
     register size_t i;
     for(i = 0; i < N; ++i) {
         matrix[i][0] = new Neuron(vec[i]);
@@ -81,7 +84,7 @@ NeuralMatrix::NeuralMatrix(const std::vector<long double> &vec) : Matrix<Neuron*
 }
 
 
-NeuralMatrix::NeuralMatrix(const NeuralMatrix& other) : Matrix<Neuron *>(other.N, other.M) {
+neural_networks::utilities::NeuralMatrix::NeuralMatrix(const NeuralMatrix& other) : Matrix<Neuron *>(other.N, other.M) {
     register size_t i, j;
     for(i = 0; i < N; ++i) {
         for(j = 0; j < M; ++j) {
@@ -92,7 +95,7 @@ NeuralMatrix::NeuralMatrix(const NeuralMatrix& other) : Matrix<Neuron *>(other.N
 }
 
 
-NeuralMatrix::NeuralMatrix(const std::vector<std::vector<long double> > &matrix_other)
+neural_networks::utilities::NeuralMatrix::NeuralMatrix(const std::vector<std::vector<long double> > &matrix_other)
         : Matrix<Neuron *>(matrix_other.size(), matrix_other[0].size()) {
     register size_t i, j;
     for(i = 0; i < N; ++i) {
@@ -107,7 +110,7 @@ NeuralMatrix::NeuralMatrix(const std::vector<std::vector<long double> > &matrix_
 }
 
 // pointers are not initialized in the Matrix<Neuron *> call
-NeuralMatrix::NeuralMatrix(const size_t n, const size_t m, bool is_null, bool random) : Matrix<Neuron *>(n, m) {
+neural_networks::utilities::NeuralMatrix::NeuralMatrix(const size_t n, const size_t m, bool is_null, bool random) : Matrix<Neuron *>(n, m) {
     if(!is_null) {
         // size_t sum = 0;
         register size_t i, j;
@@ -135,7 +138,7 @@ NeuralMatrix::NeuralMatrix(const size_t n, const size_t m, bool is_null, bool ra
     }
 }
 // deconstructor
-NeuralMatrix::~NeuralMatrix() {
+neural_networks::utilities::NeuralMatrix::~NeuralMatrix() {
     register size_t i, j;
     // size_t sum = 0;
     for(i = 0; i < N; ++i) {
@@ -148,7 +151,8 @@ NeuralMatrix::~NeuralMatrix() {
     // std::cout << "Freed " << sum << "B of memory at " << this << "\n";
 }
 
-NeuralMatrix *NeuralMatrix::operator*(const NeuralMatrix *other) const {
+neural_networks::utilities::NeuralMatrix*
+    neural_networks::utilities::NeuralMatrix::operator*(const NeuralMatrix *other) const {
     if(Matrix<Neuron *>::M == other -> N) {
         NeuralMatrix *new_layer = new NeuralMatrix(Matrix<Neuron *>::N, other -> M);
         size_t i, j;
@@ -168,7 +172,8 @@ NeuralMatrix *NeuralMatrix::operator*(const NeuralMatrix *other) const {
     }
 }
 
-NeuralMatrix *NeuralMatrix::hadamard_product(const NeuralMatrix *other) const {
+neural_networks::utilities::NeuralMatrix*
+    neural_networks::utilities::NeuralMatrix::hadamard_product(const NeuralMatrix *other) const {
     if(equal_size(*other)) {
         NeuralMatrix *new_layer = new NeuralMatrix(N, M);
         register size_t i, j;
@@ -187,7 +192,8 @@ NeuralMatrix *NeuralMatrix::hadamard_product(const NeuralMatrix *other) const {
     }
 }
 
-NeuralMatrix *NeuralMatrix::operator+(const NeuralMatrix *other) const {
+neural_networks::utilities::NeuralMatrix*
+    neural_networks::utilities::NeuralMatrix::operator+(const NeuralMatrix *other) const {
     if(equal_size(*other)) {
         NeuralMatrix *new_layer = new NeuralMatrix(N, M);
         if(!new_layer) {
@@ -208,7 +214,8 @@ NeuralMatrix *NeuralMatrix::operator+(const NeuralMatrix *other) const {
     }
 }
 
-NeuralMatrix *NeuralMatrix::operator-(const NeuralMatrix *other) const {
+neural_networks::utilities::NeuralMatrix*
+    neural_networks::utilities::NeuralMatrix::operator-(const NeuralMatrix *other) const {
     if(equal_size(*other)) {
         NeuralMatrix *new_layer = new NeuralMatrix(N, M);
         if(!new_layer) {
@@ -230,7 +237,8 @@ NeuralMatrix *NeuralMatrix::operator-(const NeuralMatrix *other) const {
 }
 
 
-NeuralMatrix* NeuralMatrix::transpose(const NeuralMatrix* other) {
+neural_networks::utilities::NeuralMatrix*
+    neural_networks::utilities::NeuralMatrix::transpose(const NeuralMatrix* other) {
     NeuralMatrix *new_mat = new NeuralMatrix(other -> M, other -> N, true);
     register size_t i, j;
     for(i = 0; i < other -> N; ++i) {
@@ -242,7 +250,7 @@ NeuralMatrix* NeuralMatrix::transpose(const NeuralMatrix* other) {
 }
 
 
-void NeuralMatrix::print(void) const { register size_t i, j;
+void neural_networks::utilities::NeuralMatrix::print(void) const { register size_t i, j;
     std::cout << "Printing NeuralMatrix object at " << this << ":\n";
     for(i = 0; i < N; ++i) {
         std::cout << "[ ";
@@ -255,7 +263,7 @@ void NeuralMatrix::print(void) const { register size_t i, j;
     std::cout << std::endl;
 }
 
-NeuralMatrix* NeuralMatrix::transpose(void) const {
+neural_networks::utilities::NeuralMatrix* neural_networks::utilities::NeuralMatrix::transpose(void) const {
     NeuralMatrix *copy = new NeuralMatrix(M, N, true);
     if(copy == nullptr) {
         std::cerr << "Error: Memory Allocation Failed at " << this << '\n';
@@ -271,7 +279,7 @@ NeuralMatrix* NeuralMatrix::transpose(void) const {
 
 }
 
-void NeuralMatrix::transpose_self() {
+void neural_networks::utilities::NeuralMatrix::transpose_self() {
     std::vector< std::vector< Neuron *> > new_matrix(M, std::vector< Neuron *>(N, nullptr));
     register size_t i, j;
     for(i = 0; i < N; ++i) {
