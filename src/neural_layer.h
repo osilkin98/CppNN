@@ -14,7 +14,7 @@ private:
 
     NeuralMatrix *data;
 
-    neural_networks::utilities::components::Matrix<long double> *bias, *weights;
+    neural_networks::utilities::Matrix<long double> *bias, *weights;
 
     size_t N;
 

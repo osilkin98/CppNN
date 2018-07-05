@@ -5,8 +5,11 @@
 #include <memory>
 #include "neural_layer.h"
 #include "matrix_operators.h"
+#include "namespaces.h"
 
-void NeuralLayer::clean() {
+using namespace neural_networks::utilities;
+
+void neural_networks::utilities::NeuralLayer::clean() {
     delete data;
     data = nullptr;
     delete bias;
@@ -15,7 +18,7 @@ void NeuralLayer::clean() {
     weights = nullptr;
 }
 
-NeuralLayer::NeuralLayer(const size_t layer_size, const size_t previous_layer_size) : N(layer_size) {
+neural_networks::utilities::NeuralLayer::NeuralLayer(const size_t layer_size, const size_t previous_layer_size) : N(layer_size) {
     data = new NeuralMatrix(layer_size, 1);
     if(previous_layer_size) { // if we have a specifed size for the previous layer
         weights = matrix_operators::create_randomized_matrix(layer_size, previous_layer_size);
