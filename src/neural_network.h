@@ -12,7 +12,7 @@
 
 
 class neural_networks::NeuralNetwork {
-private:
+protected:
     std::vector< neural_networks::utilities::NeuralLayer *> layers;
 
     long double learning_rate;
