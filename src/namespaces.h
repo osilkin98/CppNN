@@ -11,10 +11,12 @@
 #include <iostream>
 #include <cstddef>
 
-
+// main project hierarchy definitions
 namespace neural_networks {
+    // namespace for anything other namespaces will utilize
     namespace utilities {
 
+        // Basic Matrix class, needed to declare it within the main namespace hierarchy since it's templated
         template <typename T>
         class Matrix {
         public:

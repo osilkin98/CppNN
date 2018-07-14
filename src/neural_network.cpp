@@ -81,7 +81,7 @@ std::vector<long double> NeuralNetwork::get_data_vector() const {
 
 void NeuralNetwork::feed_forward(void) const {
     for(register size_t i = 1; i < layers.size(); ++i) {
-        layers[i] -> update(*layers[i - 1]);
+        layers[i] -> update();
     }
 }
 
