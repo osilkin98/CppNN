@@ -23,7 +23,7 @@ private:
     size_t N;
 
     // the neurallayer from which this layer will receive its input
-    NeuralLayer *input;
+    const NeuralLayer *input;
 
 public:
 
@@ -31,10 +31,15 @@ public:
     NeuralLayer& operator=(const NeuralLayer& other);
 
     // constructor to specify an input from another layer
-    explicit NeuralLayer(const NeuralLayer *input = nullptr, std::string label = std::string());
+    explicit NeuralLayer(
+            const NeuralLayer *input,
+            const size_t layer_size,
+            std::string label = std::string());
 
     // constructor to create the layer using a size specification
-    explicit NeuralLayer(size_t layer_size, size_t previous_layer_size = 0, std::string label = std::string());
+    // this constructor should actually NOT be used because using pointers from one NeuralLayer to another
+    // is the preferred method of operation, this should be used for creating the first layer
+     explicit NeuralLayer(size_t layer_size, size_t previous_layer_size = 0, std::string label = std::string());
 
     // copy constructor
     NeuralLayer(const NeuralLayer& other);

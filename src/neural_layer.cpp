@@ -3,6 +3,7 @@
 //
 
 #include <memory>
+#include <exception>
 #include "neural_layer.h"
 #include "matrix_operators.h"
 #include "namespaces.h"
@@ -18,7 +19,29 @@ void neural_networks::utilities::NeuralLayer::clean() {
     weights = nullptr;
 }
 
-neural_networks::utilities::NeuralLayer::NeuralLayer(const size_t layer_size, const size_t previous_layer_size) : N(layer_size) {
+neural_networks::utilities::NeuralLayer::NeuralLayer(
+        const neural_networks::utilities::NeuralLayer *input,
+        const size_t layer_size,
+        std::string label
+) : input(input), N(layer_size), label(label) {
+    try {
+        data = new NeuralMatrix(N);
+        weights = matrix_operators::create_randomized_matrix(N, input -> N);
+        bias = matrix_operators::create_randomized_matrix(N);
+    } catch (std::bad_alloc& error) {
+        std::cerr << "NeuralLayer object at <" << this << "> failed to allocate memory.\n";
+        delete data;
+        delete weights;
+        delete bias;
+    }
+}
+
+
+neural_networks::utilities::NeuralLayer::NeuralLayer(const size_t layer_size,
+                                                     const size_t previous_layer_size,
+                                                     std::string label)
+        : N(layer_size), label(label), input(nullptr) {
+
     data = new NeuralMatrix(layer_size, 1);
     if(previous_layer_size) { // if we have a specifed size for the previous layer
         weights = matrix_operators::create_randomized_matrix(layer_size, previous_layer_size);
