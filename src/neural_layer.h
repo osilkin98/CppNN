@@ -16,17 +16,27 @@ private:
 
     neural_networks::utilities::Matrix<long double> *bias, *weights;
 
+    // label for the particular layer
+    std::string label;
+
+    // the size of the data vector
     size_t N;
+
+    // the neurallayer from which this layer will receive its input
+    NeuralLayer *input;
 
 public:
 
     // operator to assign one neural layer object to another
     NeuralLayer& operator=(const NeuralLayer& other);
 
+    // constructor to specify an input from another layer
+    explicit NeuralLayer(const NeuralLayer *input = nullptr, std::string label = std::string());
 
+    // constructor to create the layer using a size specification
+    explicit NeuralLayer(size_t layer_size, size_t previous_layer_size = 0, std::string label = std::string());
 
-    explicit NeuralLayer(size_t layer_size, size_t previous_layer_size = 0);
-
+    // copy constructor
     NeuralLayer(const NeuralLayer& other);
 
     ~NeuralLayer();
