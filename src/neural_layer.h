@@ -9,7 +9,10 @@
 #include "namespaces.h"
 
 class neural_networks::utilities::NeuralLayer {
-private:
+protected:
+
+    // method is intended for internal use in order to empty the space used instead
+    // of just deleting the entire neurrallayer object in some fringe case
     void clean();
 
     NeuralMatrix *data;
