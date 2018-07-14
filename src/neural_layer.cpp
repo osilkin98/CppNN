@@ -98,21 +98,21 @@ NeuralLayer& NeuralLayer::operator=(const NeuralLayer& other) {
     return *this;
 }
 
-// this just performs the forward pass operation for one Layer from the other
-void NeuralLayer::update(const NeuralLayer &other) const {
-    if(weights -> M != other.data -> N) {
+// this just performs the forward pass operation for one Layer from the previous layer
+void NeuralLayer::update() const {
+    if(weights -> M != input -> data -> N) {
         std::cerr << "During update operation, bias M [" << bias -> N << "] at " << bias
-                  << " in object " << this << " does not match input vector size N [" << other.data -> N
-                  << "] at " << other.data << '\n';
+                  << " in object " << this << " does not match input vector size N [" << input -> data -> N
+                  << "] at " << input -> data << '\n';
     }
     register size_t i;
     long double sum;
-    if(other.bias) { // if we're not dealing with the input layer
+    if(input -> bias) { // if we're not dealing with the input layer
         for(register size_t elem = 0; elem < N; ++elem) {
             sum = bias -> matrix[elem][0];
             for(i = 0; i < bias -> M; ++i) {
                 sum += weights -> matrix[elem][i] *
-                       other.data -> matrix[i][0] -> function;
+                       input -> data -> matrix[i][0] -> function;
             }
             data -> matrix[elem][0] -> set(sum);
         }
@@ -121,7 +121,7 @@ void NeuralLayer::update(const NeuralLayer &other) const {
             sum = bias -> matrix[elem][0];
             for(i = 0; i < bias -> M; ++i) {
                 sum += weights -> matrix[elem][i]  *
-                       other.data -> matrix[i][0] -> data;
+                       input -> data -> matrix[i][0] -> data;
             }
             data -> matrix[elem][0] -> set(sum);
         }

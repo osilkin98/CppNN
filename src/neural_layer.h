@@ -47,10 +47,15 @@ public:
     // copy constructor
     NeuralLayer(const NeuralLayer& other);
 
+    // deconstructor
     ~NeuralLayer();
 
+    // print function to actually debug the NeuralLayer
     void print() const;
-    virtual void update(const NeuralLayer& other) const;
+
+    // routine to accept input from the previous layer and prepare the current layer
+    // for having its data passed onto the next layer whatever it may be
+    virtual void update() const;
 
     friend class neural_networks::NeuralNetwork;
 };
